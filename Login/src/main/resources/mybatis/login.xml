@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="login">
+
+	<select id="selectLoginDo" parameterType="map" resultType="LoginDo">
+		SELECT * FROM login_${tbIndex} WHERE player_id = #{player_id};
+	</select>
+
+	<select id="selectAllLoginDo" parameterType="map" resultType="LoginDo">
+		SELECT * FROM login_${tbIndex};
+	</select>
+
+	<update id="updateLoginDo" parameterType="LoginDo" >
+		UPDATE login_${tbIndex} SET `token` = #{token}, `big_group` = #{big_group}, `server_group` = #{server_group}, `ticket` = #{ticket} WHERE player_id = #{player_id};
+	</update>
+
+	<insert id="insertLoginDo" parameterType="LoginDo" >
+		INSERT INTO login_${tbIndex} (`player_id`, `token`, `big_group`, `server_group`, `ticket`) VALUES (#{player_id}, #{token}, #{big_group}, #{server_group}, #{ticket});
+	</insert>
+
+	<delete id="deleteLoginDo" parameterType="map" >
+		DELETE FROM login_${tbIndex} WHERE player_id = #{player_id};
+	</delete>
+</mapper>

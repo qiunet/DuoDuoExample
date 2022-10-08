@@ -11,5 +11,25 @@
 
     <artifactId>Basic</artifactId>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>config/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.game.example</groupId>
+            <artifactId>Common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>

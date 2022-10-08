@@ -9,19 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Login</artifactId>
+    <artifactId>Common</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.game.example</groupId>
-            <artifactId>Common</artifactId>
-            <version>1.0.0</version>
+            <groupId>io.github.qiunet</groupId>
+            <artifactId>duoduo-all</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.game.example</groupId>
-            <artifactId>Basic</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
     </dependencies>
 

@@ -11,13 +11,25 @@
     <modules>
         <module>Basic</module>
         <module>Login</module>
+        <module>Common</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.github.qiunet</groupId>
-            <artifactId>duoduo-all</artifactId>
-            <version>7.0.3</version>
-        </dependency>
-    </dependencies>
+    <properties>
+        <duoduo.version>7.0.5</duoduo.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.qiunet</groupId>
+                <artifactId>duoduo-all</artifactId>
+                <version>${duoduo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
