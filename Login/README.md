@@ -1,0 +1,24 @@
+###登录服
+> 启动类LoginServerBootstrap
+
+> 启动类启动时注册了NettyHttpServer服务，并在处理管道中定义了HttpServerHandler
+
+> HttpServerHandler处理了请求包解码后的转发工作
+
+> 通过解析具体的url，执行对应的HttpHandler 
+```
+UrlRequestHandlerMapping在起服时检索所有@UriPathHandler注解的请求处理器，处理器需实现IHttpHandler接口。
+在实现处理器时可根据数据格式选择继承HttpJsonHandler、HttpProtobufHandler、HttpStringHandler
+如果希望处理器异步执行，可同时实现IAsyncHttpHandler接口。
+如LoginHandler继承了AsyncHttpJsonHandler。其继承HttpJsonHandler并实现IAsyncHttpHandler
+```
+
+> HttpServerHandler同时实现了WebSocket协议升级，也有转发ChannelDataMapping中的处理器逻辑，
+> 理论上是可以直接通过HttpServerHandler处理H5游戏的协议
+
+```
+登录服这里主要处理客户端登录游戏服前的分发工作，类似网关的功能
+客户端请求通过LoginHandler调用到LoginService.
+登录处理中会先查看数据库是否有注册登陆服的记录。同时也会缓存一份在redis中（DataSupport相关在游戏服中编写）
+最后通过保存在redis中的相关数据(如在线人数，运行服务器列表等)分配具体游戏服给客户端
+```
