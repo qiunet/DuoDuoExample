@@ -2,7 +2,6 @@ package com.game.example.basic.http.response;
 
 
 import com.game.example.basic.http.BaseJsonResponseData;
-import com.game.example.common.constants.GameStatus;
 
 /***
  * 登录的http响应
@@ -16,13 +15,6 @@ public class LoginResponse extends BaseJsonResponseData<LoginResponse> {
 	private int serverPort;
 
 	private String ticket;
-
-
-	public static LoginResponse valueOfFail(GameStatus status){
-		LoginResponse data = new LoginResponse();
-		data.setFail(status);
-		return data;
-	}
 
 	public String getServerHost6() {
 		return serverHost6;

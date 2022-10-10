@@ -12,15 +12,15 @@ import org.qiunet.data.redis.entity.RedisEntity;
 @Table(name = "login", splitTable = true, dbSource = "login")
 public class LoginDo extends RedisEntity<Long> {
 	@Column(comment = "玩家游戏和平台ID", isKey = true)
-	private long player_id;
+	private long player_id;	// 客户端带过来
 	@Column(comment = "玩家平台token")
-	private String token;
+	private String token;	// 客户端带过来
 	@Column(comment = "大区ID")
-	private int big_group;
+	private int big_group;	// 客户端带过来
 	@Column(comment = "玩家所在服务器组")
-	private int server_group;
+	private int server_group; // 登录服分配
 	@Column(comment = "玩家游戏内部交互入场券")
-	private String ticket;
+	private String ticket;	// 登录服生成
 
 	/**默认的构造函数**/
 	public LoginDo(){}

@@ -33,14 +33,6 @@ public class PlayerPlatformData {
 	 */
 	private String name;
 	/**
-	 * 头像
-	 */
-	private String icon;
-	/**
-	 * 个人简介
-	 */
-	private String intro;
-	/**
 	 * 性别
 	 */
 	private int sex;
@@ -50,8 +42,6 @@ public class PlayerPlatformData {
 		data.playerId = playerId;
 		data.token = token;
 		data.name = String.valueOf(playerId);
-		data.icon = "";
-		data.intro = "";
 		data.sex = 0;
 		data.serverId = serverId;
 		data.ticket = ticket;
@@ -98,22 +88,6 @@ public class PlayerPlatformData {
 		this.name = name;
 	}
 
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
-
-	public String getIntro() {
-		return intro;
-	}
-
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
-
 	public int getSex() {
 		return sex;
 	}
@@ -156,7 +130,6 @@ public class PlayerPlatformData {
 		if(playerPlatformData != null && !Objects.equals(playerPlatformData.getTicket(), originTicket)){
 			return;
 		}
-
 		del(playerId);
 	}
 }

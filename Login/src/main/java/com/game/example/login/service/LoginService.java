@@ -36,7 +36,7 @@ public enum LoginService {
             return response.setFail(GameStatus.SERVER_ABSENT_NOW);
         }
 
-        // 杀进程重进. 不算重连
+        // 客户端杀进程重连登录服，目前的处理是每次生成新的ticket. 不算重连
         PlayerPlatformData data = PlayerPlatformData.valueOf(requestData.getUid(), requestData.getToken(), serverInfo.getServerId(), loginBo.getDo().getTicket());
         data.sendToRedis();
 
