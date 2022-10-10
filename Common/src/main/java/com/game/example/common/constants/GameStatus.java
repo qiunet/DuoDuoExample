@@ -9,7 +9,6 @@ public enum GameStatus implements IGameStatus {
 	LOGIN_TICKET_ERROR(1001001, "登录券错误"),
 	LOGIN_SERVER_ERROR(1001002, "登录serverId错误"),
 	LOGIN_ALREADY_REGISTER(1001003, "已经有注册了"),
-	LOGIN_CONNECTION_IDKEY_ERROR(1001011, "ConnectionReq给的OpenId错误"),
 	LOGIN_REQUEST_REPEATED(1001012, "重复请求LoginReq"),
 
 	AVATAR_ROLE_ABSENT(5000010, "角色模型不存在"),

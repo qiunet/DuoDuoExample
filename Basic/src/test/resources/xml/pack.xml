@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db_entity_list key="player_id"
+				   subKey="type"
+				   dbSource="basic"
+				   name="PackDo"
+				   packageName="com.game.example.basic.logic.pack"
+				   xmlns="https://github.com/qiunet/DuoDuo/DbEntityList"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="https://github.com/qiunet/DuoDuo/DbEntityList
+				https://raw.githubusercontent.com/qiunet/DuoDuo/master/ProjectInit/src/main/resources/xsd/DbEntityList.xsd"
+>
+	<field name="player_id" type="long" comment="玩家id" />
+	<field name="type" type="int" comment="背包类型" />
+	<field name="data" type="String" jdbcType="MEDIUMTEXT" comment="背包的json数据"/>
+	<constructor>
+		<constructor_arg field="player_id" />
+		<constructor_arg field="type" />
+	</constructor>
+</db_entity_list>

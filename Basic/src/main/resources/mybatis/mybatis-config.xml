@@ -25,13 +25,13 @@
 		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
 	</settings>
 	<typeAliases>
-		<package name="com.game.example.basic.logic.player.entity" />
+		<package name="com.game.example.basic.logic.pack.entity" />
 	</typeAliases>
     <plugins>
         <plugin interceptor="org.qiunet.data.core.support.db.plugins.MybatisInterceptor" />
     </plugins>
 	<mappers>
 		<mapper resource="mybatis/CreateTableMapper.xml"/>
-        <mapper resource="mybatis/player.xml" />
+        <mapper resource="mybatis/pack.xml" />
     </mappers>
 </configuration>

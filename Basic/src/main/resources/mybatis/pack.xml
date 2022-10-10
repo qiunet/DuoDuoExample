@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pack">
+
+	<select id="selectPackDo" parameterType="map" resultType="PackDo">
+		SELECT * FROM pack WHERE player_id = #{player_id};
+	</select>
+
+	<select id="selectAllPackDo" parameterType="map" resultType="PackDo">
+		SELECT * FROM pack;
+	</select>
+
+	<update id="updatePackDo" parameterType="PackDo" >
+		UPDATE pack SET `data` = #{data}  WHERE player_id = #{player_id} AND type = #{type};
+	</update>
+
+	<insert id="insertPackDo" parameterType="PackDo" >
+		INSERT INTO pack (`player_id`, `type`, `data`) VALUES (#{player_id}, #{type}, #{data});
+	</insert>
+
+	<delete id="deletePackDo" parameterType="map" >
+		DELETE FROM pack  WHERE player_id = #{player_id} AND type = #{type};
+	</delete>
+</mapper>

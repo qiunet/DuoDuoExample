@@ -6,10 +6,6 @@ import org.qiunet.cfg.base.ICfgCheck;
 import org.qiunet.cfg.base.ISimpleMapCfg;
 import org.qiunet.utils.collection.generics.StringList;
 
-/**
- * @author hjp
- * 2022-04-26 14:22
- */
 @Cfg("config/role_avatar.json")
 public class RoleAvatarCfg implements ISimpleMapCfg<Integer>, ICfgCheck {
 	/**
@@ -28,6 +24,7 @@ public class RoleAvatarCfg implements ISimpleMapCfg<Integer>, ICfgCheck {
 	 * 裸体部位资源替换
 	 */
 	private StringList parts;
+
 	@Override
 	public Integer getId() {
 		return id;

@@ -38,6 +38,29 @@
                 <version>${duoduo.version}</version>
             </dependency>
             <dependency>
+                <groupId>io.github.qiunet</groupId>
+                <artifactId>GameTest</artifactId>
+                <version>${duoduo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.github.qiunet</groupId>
+                        <artifactId>FlashHandler</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.github.qiunet</groupId>
+                <artifactId>ProjectInit</artifactId>
+                <version>${duoduo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.github.qiunet</groupId>
+                        <artifactId>QiunetDatas</artifactId>
+                    </exclusion>
+                </exclusions>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>1.2.3</version>

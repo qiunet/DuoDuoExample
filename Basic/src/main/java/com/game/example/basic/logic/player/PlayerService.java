@@ -1,4 +1,4 @@
-package com.game.example.server.logic.player;
+package com.game.example.basic.logic.player;
 
 import com.game.example.basic.logic.player.entity.PlayerBo;
 import com.game.example.basic.logic.player.entity.PlayerDo;

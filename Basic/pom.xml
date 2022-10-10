@@ -31,5 +31,9 @@
             <artifactId>Common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.qiunet</groupId>
+            <artifactId>ProjectInit</artifactId>
+        </dependency>
     </dependencies>
 </project>
