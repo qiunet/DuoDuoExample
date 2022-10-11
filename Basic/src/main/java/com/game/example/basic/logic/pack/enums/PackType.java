@@ -2,15 +2,14 @@ package com.game.example.basic.logic.pack.enums;
 
 import com.baidu.bjf.remoting.protobuf.EnumReadable;
 import com.baidu.bjf.remoting.protobuf.annotation.Protobuf;
-import com.game.example.basic.logic.pack.PackManager;
 import com.game.example.basic.logic.pack.PackService;
+import com.game.example.basic.logic.pack.consume.ResourceConsume;
 import com.game.example.basic.logic.pack.domain.ItemStorage;
 import com.game.example.basic.logic.pack.reward.ResourceReward;
 import com.game.example.basic.logic.resource.ResourceManager;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.function.base.IResourceCfg;
 import org.qiunet.function.base.IResourceType;
-import org.qiunet.function.consume.BaseConsume;
 import org.qiunet.function.consume.ConsumeConfig;
 import org.qiunet.function.reward.RewardConfig;
 import org.qiunet.utils.exceptions.EnumParseException;
@@ -22,8 +21,8 @@ public enum PackType implements EnumReadable, IResourceType {
 	@Protobuf(description = "资源背包")
 	RESOURCE(1, true) {
 		@Override
-		public <T extends BaseConsume<?>> T createConsume(ConsumeConfig consumeConfig) {
-			return null;
+		public ResourceConsume createConsume(ConsumeConfig consumeConfig) {
+			return new ResourceConsume(consumeConfig);
 		}
 
 		@Override
@@ -50,17 +49,7 @@ public enum PackType implements EnumReadable, IResourceType {
 	}
 
 	/**
-	 * 背包容量
-	 * @return
-	 */
-	public int capacity() {
-		return PackManager.instance.capacity(this);
-	}
-
-	/**
 	 * 获取背包存储对象
-	 * @param playerActor
-	 * @return
 	 */
 	public ItemStorage getItemStorage(PlayerActor playerActor) {
 		return PackService.instance.getItemStorage(playerActor, this);

@@ -27,6 +27,7 @@
 	<typeAliases>
 		<package name="com.game.example.basic.logic.id_builder.entity" />
 		<package name="com.game.example.basic.logic.pack.entity" />
+		<package name="com.game.example.basic.logic.player.entity" />
 	</typeAliases>
     <plugins>
         <plugin interceptor="org.qiunet.data.core.support.db.plugins.MybatisInterceptor" />
@@ -35,5 +36,6 @@
 		<mapper resource="mybatis/CreateTableMapper.xml"/>
         <mapper resource="mybatis/id_builder.xml" />
         <mapper resource="mybatis/pack.xml" />
+        <mapper resource="mybatis/player.xml" />
     </mappers>
 </configuration>

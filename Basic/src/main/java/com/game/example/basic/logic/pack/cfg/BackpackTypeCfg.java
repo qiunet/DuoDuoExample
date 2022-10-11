@@ -4,11 +4,6 @@ import com.game.example.basic.logic.pack.enums.PackType;
 import org.qiunet.cfg.annotation.Cfg;
 import org.qiunet.cfg.base.ISimpleMapCfg;
 
-/***
- *
- * @author qiunet
- * 2021/12/23 10:34
- */
 @Cfg("config/backpack_type.json")
 public class BackpackTypeCfg implements ISimpleMapCfg<PackType> {
 

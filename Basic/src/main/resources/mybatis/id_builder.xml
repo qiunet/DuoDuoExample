@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="id_builder">
+
+	<select id="selectIdBuilderDo" parameterType="map" resultType="IdBuilderDo">
+		SELECT * FROM id_builder WHERE player_id = #{player_id};
+	</select>
+
+	<select id="selectAllIdBuilderDo" parameterType="map" resultType="IdBuilderDo">
+		SELECT * FROM id_builder;
+	</select>
+
+	<update id="updateIdBuilderDo" parameterType="IdBuilderDo" >
+		UPDATE id_builder SET `curr_id` = #{curr_id}  WHERE player_id = #{player_id} AND type = #{type};
+	</update>
+
+	<insert id="insertIdBuilderDo" parameterType="IdBuilderDo" >
+		INSERT INTO id_builder (`player_id`, `type`, `curr_id`) VALUES (#{player_id}, #{type}, #{curr_id});
+	</insert>
+
+	<delete id="deleteIdBuilderDo" parameterType="map" >
+		DELETE FROM id_builder  WHERE player_id = #{player_id} AND type = #{type};
+	</delete>
+</mapper>

@@ -6,7 +6,7 @@ import org.qiunet.cfg.base.ISimpleMapCfg;
 import org.qiunet.function.base.IResourceCfg;
 import org.qiunet.function.base.IResourceType;
 
-@Cfg("config/backpack_type.json")
+@Cfg("config/resource_data.json")
 public class ResourceCfg implements ISimpleMapCfg<Integer>, IResourceCfg {
 
     private int resId;
