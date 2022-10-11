@@ -1,26 +1,8 @@
 [
     {
         "id": 1,
-        "gender": 2,
+        "gender": 1,
         "intPartRes": "XSY0G9999;S0G01;PKZ0G9999;DT0G01;J0G01;JXZ0G9999;T0G01;TF0G01",
         "parts": "TF0G01;T0G01;X0G01;S0G01;P0G01;DT0G01;J0G01;J0G02"
-    },
-    {
-        "id": 2,
-        "gender": 1,
-        "intPartRes": "XSY0B9999;S0B01;PKZ0B9999;DT0B01;J0B01;JXZ0B9999;T0B01;TF0B01",
-        "parts": "TF0B01;T0B01;X0B01;S0B01;P0B01;DT0B01;J0B01"
-    },
-    {
-        "id": -99998,
-        "gender": 2,
-        "intPartRes": "TF0G03;T0G01;X0G01;S0G01;P0G01;DT0G01;J0G01",
-        "parts": "TF0G03;T0G01;X0G01;S0G01;P0G01;DT0G01;J0G01;J0G02"
-    },
-    {
-        "id": -99999,
-        "gender": 1,
-        "intPartRes": "TF0B01;T0B01;X0B01;S0B01;P0B01;DT0B01;J0B01",
-        "parts": "TF0B01;T0B01;X0B01;S0B01;P0B01;DT0B01;J0B01"
     }
 ]

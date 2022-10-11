@@ -1,14 +1,14 @@
 [
     {
-        "resId": "1",
+        "resId": 1,
         "name": "铜钱"
     },
     {
-        "resId": "2",
+        "resId": 2,
         "name": "银钱"
     },
     {
-        "resId": "3",
+        "resId": 3,
         "name": "金钱"
     }
 ]

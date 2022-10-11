@@ -6,6 +6,8 @@ import org.qiunet.function.base.IOperationType;
 
 @ProtobufClass(description = "操作来源")
 public enum OperationType implements IOperationType {
+	@Protobuf(description = "无")
+	NONE(0),
 	@Protobuf(description = "GM")
 	GM(1),
 	;
