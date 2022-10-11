@@ -25,6 +25,7 @@
 		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
 	</settings>
 	<typeAliases>
+		<package name="com.game.example.basic.logic.id_builder.entity" />
 		<package name="com.game.example.basic.logic.pack.entity" />
 	</typeAliases>
     <plugins>
@@ -32,6 +33,7 @@
     </plugins>
 	<mappers>
 		<mapper resource="mybatis/CreateTableMapper.xml"/>
+        <mapper resource="mybatis/id_builder.xml" />
         <mapper resource="mybatis/pack.xml" />
     </mappers>
 </configuration>
