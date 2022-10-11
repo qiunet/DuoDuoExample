@@ -1,0 +1,17 @@
+[
+    {
+        "type": 1,
+        "name": "道具背包",
+        "capacity": 200
+    },
+    {
+        "type": 2,
+        "name": "装饰物背包",
+        "capacity": 200
+    },
+    {
+        "type": 3,
+        "name": "建筑物背包",
+        "capacity": 200
+    }
+]

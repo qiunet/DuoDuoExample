@@ -32,4 +32,12 @@ public interface ProtocolID {
         int RANDOM_NAME_REQ = 1007;
         int RANDOM_NAME_RSP = 1007001;
     }
+
+    //背包相关  模块ID: 4
+    interface Pack {
+        // 所有物品推送
+        int ALL_ITEM_PUSH = 4000000;
+        // 物品变动推送(包含删除)
+        int ITEM_CHANGE_PUSH = 4000001;
+    }
 }
