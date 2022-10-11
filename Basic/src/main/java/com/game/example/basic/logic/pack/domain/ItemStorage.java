@@ -5,12 +5,10 @@ import com.game.example.basic.logic.id_builder.enums.IDBuilderType;
 import com.game.example.basic.logic.pack.entity.PackBo;
 import com.game.example.basic.logic.pack.enums.PackType;
 import com.game.example.basic.logic.pack.proto.PackItemTo;
-import com.game.example.common.logger.GameLogger;
 import com.google.common.collect.Sets;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.utils.json.JsonUtil;
 import org.qiunet.utils.string.StringUtil;
-import org.slf4j.Logger;
 
 import java.util.*;
 import java.util.function.Function;
@@ -20,7 +18,6 @@ import java.util.stream.Collectors;
  * 背包存储
  */
 public class ItemStorage {
-	private static final Logger logger = GameLogger.COMM_LOGGER.getLogger();
 	final Set<Integer> updateItems = Sets.newHashSet(); // 需要推送客户端有变化的uid列表
 	private final Map<Integer, Integer> itemCounts;	// resId -> num
 	private final Map<Integer, PackItem> items;	// uid -> packItem
@@ -168,9 +165,6 @@ public class ItemStorage {
 		packBo.update();
 	}
 
-	/**
-	 *
-	 */
 	public String serialize() {
 		String jsonString = JsonUtil.toJsonString(items.values());
 		packBo.getDo().setData(jsonString);

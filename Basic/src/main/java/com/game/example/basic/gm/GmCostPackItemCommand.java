@@ -20,8 +20,7 @@ public class GmCostPackItemCommand {
 
 	@GmCommand(commandName = "消耗背包物品")
 	public IGameStatus costPackItem(PlayerActor player,
-   		@GmParamDesc(value = "消耗背包物品", example = "资源ID_数量;...") String items
-	) {
+   		@GmParamDesc(value = "消耗背包物品", example = "资源ID_数量;...") String items) {
 		if(StringUtil.isEmpty(items))
 			return GameStatus.FAIL;
 

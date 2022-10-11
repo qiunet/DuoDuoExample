@@ -8,20 +8,13 @@ import java.util.Map;
 
 /***
  * ID 生成
- *
- * @author qiunet
- * 2021/11/4 16:10
  */
 public enum IDBuilderType {
-	/**
-	 * 邮件ID
-	 */
-	MAIL(1),
 	/**
 	 * 物品
 	 * 物品的id builder 只能item storage 使用
 	 */
-	ITEM(2),
+	ITEM(1),
 	;
 
 	private final int type;

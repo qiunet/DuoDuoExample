@@ -20,8 +20,7 @@ public class GmAddPackItemCommand {
 
 	@GmCommand(commandName = "增加背包物品")
 	public IGameStatus addPackItem(PlayerActor player,
-   		@GmParamDesc(value = "增加背包物品", example = "资源ID_数量;...") String items
-	) {
+   		@GmParamDesc(value = "增加背包物品", example = "资源ID_数量;...") String items) {
 		if(StringUtil.isEmpty(items))
 			return GameStatus.FAIL;
 

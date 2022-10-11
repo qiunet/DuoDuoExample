@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /***
- *
  * 游戏日志类型
  * 可以根据需求划分类型打印
  **/

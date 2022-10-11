@@ -9,9 +9,6 @@ import org.qiunet.utils.string.StringUtil;
 
 /***
  * redis 工具类
- *
- * @author qiunet
- * 2021/10/28 14:00
  **/
 public final class RedisGlobalUtil extends BasePoolRedisUtil {
 	private static final RedisGlobalUtil instance = new RedisGlobalUtil();
