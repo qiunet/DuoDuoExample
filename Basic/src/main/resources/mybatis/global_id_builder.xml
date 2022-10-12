@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="global_id_builder">
+
+	<select id="selectGlobalIdBuilderDo" parameterType="map" resultType="GlobalIdBuilderDo">
+		SELECT * FROM global_id_builder WHERE type = #{type};
+	</select>
+
+	<select id="selectAllGlobalIdBuilderDo" parameterType="map" resultType="GlobalIdBuilderDo">
+		SELECT * FROM global_id_builder;
+	</select>
+
+	<update id="updateGlobalIdBuilderDo" parameterType="GlobalIdBuilderDo" >
+		UPDATE global_id_builder SET `id_val` = #{id_val} WHERE type = #{type};
+	</update>
+
+	<insert id="insertGlobalIdBuilderDo" parameterType="GlobalIdBuilderDo" >
+		INSERT INTO global_id_builder (`type`, `id_val`) VALUES (#{type}, #{id_val});
+	</insert>
+
+	<delete id="deleteGlobalIdBuilderDo" parameterType="map" >
+		DELETE FROM global_id_builder WHERE type = #{type};
+	</delete>
+</mapper>

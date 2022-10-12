@@ -13,6 +13,13 @@ public enum GameStatus implements IGameStatus {
 
 	AVATAR_ROLE_ABSENT(5000010, "角色模型不存在"),
 
+	ROOM_OPERATION_NOT_IN_SCENE(8001000, "当前不在场景!"),
+	ROOM_OPERATION_NOT_IN_ROOM(8001001, "当前不在房间!"),
+	ROOM_ENTER_BUT_IN_CROSS(8001002, "请求进入房间,但是在跨服状态"),
+
+	ROOM_JOIN_NOT_EXIST(8002001, "房间ID不存在"),
+	ROOM_JOIN_FAIL(8002005, "进入房间失败"),
+
 	;
 	private final int status;
 	private final String desc;

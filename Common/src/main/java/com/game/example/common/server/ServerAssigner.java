@@ -57,6 +57,13 @@ public enum ServerAssigner {
     private static final LazyLoader<Integer> CURRENT_SERVER_ID = new LazyLoader<>(ServerNodeManager::getCurrServerId);
     private static final LazyLoader<Integer> CURRENT_SERVER_GROUP_ID = new LazyLoader<>(() -> ServerType.getGroupId(CURRENT_SERVER_ID.get()));
 
+    /**
+     * 分配一台人少的 cross 服务器
+     */
+    public ServerInfo assignCrossServer() {
+        return assignServer(ServerType.CROSS, null);
+    }
+
     // 分配在线人数最少的组
     public int assignGroupId() {
         String onlineSizeRedisKey = RedisDataUtil.jedis().get(currentOnlineSizeRedisKey(ServerType.LOGIC));
@@ -83,7 +90,7 @@ public enum ServerAssigner {
     /**
      * 根据类型分配服务器
      */
-    private ServerInfo assignServer(ServerType serverType, Predicate<ServerInfo> filter) {
+    public ServerInfo assignServer(ServerType serverType, Predicate<ServerInfo> filter) {
         List<ServerInfo> serverInfoList = getServerInfoList(serverType);
         if (serverInfoList.isEmpty()) {
             return null;

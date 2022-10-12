@@ -40,4 +40,34 @@ public interface ProtocolID {
         // 物品变动推送(包含删除)
         int ITEM_CHANGE_PUSH = 4000001;
     }
+
+    // 游戏玩法相关 占用 [8 - 10] 后面的业务从11开始
+    interface Game {
+        // 匹配等通用协议 8001 ~ 8499
+        interface Room {
+            // 房间信息推送
+            int ROOM_INFO_PUSH = 8000009;
+
+            //  玩家进入房间推送
+            int ROOM_PLAYER_ENTER_PUSH = 8000012;
+            // 玩家离开房间推送
+            int ROOM_PLAYER_QUIT_PUSH = 8000013;
+            // 房间销毁推送
+            int ROOM_DESTROY_PUSH = 8000014;
+            // 加入房间失败返回
+            int JOIN_ROOM_FAIL_RSP = 8000015;
+
+            // 退出房间请求.
+            int ROOM_QUIT_REQ = 8001;
+            int ROOM_QUIT_RSP = 8001001;
+
+            // 加入公共房间
+            int JOIN_PUBLIC_ROOM_REQ = 8002;
+            // 创建私密房间
+            int CREATE_PRIVACY_ROOM_REQ = 8003;
+
+            // 加入指定ID房间
+            int JOIN_ROOM_REQ = 8004;
+        }
+    }
 }

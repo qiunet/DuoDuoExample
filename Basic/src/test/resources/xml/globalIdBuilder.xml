@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db_entity key="type"
+			  dbSource="basic"
+			  comment="全局id生成表"
+			  name="GlobalIdBuilderDo"
+			  packageName="com.game.example.basic.logic.id_builder.global"
+			  xmlns="https://github.com/qiunet/DuoDuo/DbEntity"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="https://github.com/qiunet/DuoDuo/DbEntity
+			https://raw.githubusercontent.com/qiunet/DuoDuo/master/ProjectInit/src/main/resources/xsd/DbEntity.xsd"
+>
+	<field name="type" type="int" comment="类型" />
+	<field name="id_val" type="long" comment="id值" />
+
+	<constructor>
+		<constructor_arg field="type"/>
+		<constructor_arg field="id_val"/>
+	</constructor>
+</db_entity>

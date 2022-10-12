@@ -150,13 +150,14 @@ public enum PlayerService {
             playerActor.getObserverSupport().attach(IPlayerDestroy.class, actor -> {
                 PlayerPlatformData.del(playerActor.getPlayerId(), ticket);
             });
+            if (playerActor.isCrossStatus()) {
+                // 告诉跨服服务. 玩家这里断线了.
+                playerActor.fireCrossEvent(PlayerBrokenEvent.valueOf());
+            }
             return;
         }
         PlayerPlatformData.del(playerActor.getPlayerId());
     }
-
-
-
 
     /*private static PlayerGlobalInfo refreshPlayerInfo(PlayerActor player) {
         PlayerBo playerBo = player.getData(PlayerBo.class);
