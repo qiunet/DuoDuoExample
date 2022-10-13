@@ -3,7 +3,7 @@ package com.game.example.basic.logic.game;
 import com.game.example.basic.logic.game.room.Room;
 import com.game.example.basic.logic.game.room.RoomManager;
 import com.game.example.basic.logic.game.room.event.PlayerRoomInfoRspEvent;
-import com.game.example.basic.logic.game.room.event.cross.EnterRoomByIdEventData;
+import com.game.example.basic.logic.game.room.event.cross.EnterRoomByIdEvent;
 import com.game.example.basic.logic.game.room.event.cross.EnterRoomCrossEvent;
 import com.game.example.basic.logic.game.room.event.cross.PlayerReconnectEvent;
 import com.game.example.basic.logic.game.room.event.cross.PlayerRoomInfoReqEvent;
@@ -53,9 +53,9 @@ public enum GameCrossService {
     }
 
     @EventListener
-    private void enterRoomByIdEvent(EnterRoomByIdEventData data) {
-        Room room = RoomManager.instance.getRoom(data.getRoomId());
-        CrossPlayerActor player = data.getPlayer();
+    private void enterRoomByIdEvent(EnterRoomByIdEvent event) {
+        Room room = RoomManager.instance.getRoom(event.getRoomId());
+        CrossPlayerActor player = event.getPlayer();
         if (room == null) {
             player.sendMessage(JoinRoomFailRsp.valueOf(GameStatus.ROOM_JOIN_NOT_EXIST));
             player.logout();
@@ -90,8 +90,6 @@ public enum GameCrossService {
             room.addMessage(r -> {
                 r.getHandler().playerBrokenEvent(r, actor);
             });
-        } else {
-            // event.getPlayer().getVal(Player.PLAYER_IN_ACTOR_KEY).getPosition().offline();
         }
     }
 }

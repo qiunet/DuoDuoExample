@@ -64,10 +64,12 @@ public class Room extends BaseRoom implements IObserverSupportOwner<Room> {
                 // 绑定player
                 ROOM.set(player, this);
                 RoomPlayer roomPlayer = addPlayer(player);
+                // TODO enterScene
 
-                // 监听playerActor销毁事件
+                // 注册监听CrossPlayerActor销毁的事件，在UserOnlineManager#onLogout触发
                 ObserverSupport<? extends AbstractUserActor> observerSupport = player.getUserActor().getObserverSupport();
                 observerSupport.attach(IPlayerDestroy.class, (p) -> this.playerDestroy(player));
+                // 发送玩家客户端房间信息
                 roomPlayer.sendMessage(RoomInfoPush.valueOf(getSceneId(), this.buildRoomData()));
             }catch (Exception e0 ) {
                 this.quit0(player, true);
@@ -79,11 +81,11 @@ public class Room extends BaseRoom implements IObserverSupportOwner<Room> {
     private RoomPlayer addPlayer(MovableObject player){
         RoomPlayer roomPlayer = new RoomPlayer(player);
         this.players.putIfAbsent(player.getId(), roomPlayer);
-
         this.roomInfoData.alterPlayerNum(1);
-
+        // 通知房间中其他玩家我进入房间了
         this.broadcast(RoomPlayerEnterPush.valueOf(RoomPlayerTo.valueOf(roomPlayer)), player0 -> player0.isNotSelf(player.getId()));
-        this.observerSupport.syncFire(IRoomEnterPlayer.class, i -> i.enter(this, roomPlayer));
+        // 通知观察者玩家进入
+        this.observerSupport.syncFire(IRoomEnterPlayer.class, i -> i.enter(this, roomPlayer));  // 未attach不会有处理
         return roomPlayer;
     }
 
@@ -123,8 +125,9 @@ public class Room extends BaseRoom implements IObserverSupportOwner<Room> {
         }
         ROOM.remove(player);
         this.roomInfoData.alterPlayerNum(-1);
+        // 广播给房间其他玩家我退出房间
         this.broadcast(leaveRoomPush, p -> p.isNotSelf(player.getId()));
-        this.observerSupport.syncFire(IRoomQuitPlayer.class, i -> i.quit(this, roomPlayer));
+        this.observerSupport.syncFire(IRoomQuitPlayer.class, i -> i.quit(this, roomPlayer));    // 暂时无实现
         // 房间销毁
         if (players.isEmpty()) {
             this.destroy();
@@ -146,6 +149,11 @@ public class Room extends BaseRoom implements IObserverSupportOwner<Room> {
             }
             consumer.accept(player);
         }
+    }
+
+    @Override
+    protected void initialize() {
+        handler.initialize(this);
     }
 
     @Override

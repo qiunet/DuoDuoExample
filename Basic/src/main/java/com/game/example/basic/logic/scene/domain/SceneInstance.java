@@ -6,7 +6,6 @@ import org.qiunet.flash.handler.common.MessageHandler;
  * 地图的实例
  */
 public final class SceneInstance extends MessageHandler<SceneInstance> {
-
     /**
      * 场景的ID
      */

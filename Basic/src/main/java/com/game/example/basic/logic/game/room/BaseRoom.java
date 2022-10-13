@@ -7,6 +7,9 @@ import org.qiunet.utils.args.Argument;
 import org.qiunet.utils.args.ArgumentKey;
 import org.qiunet.utils.args.IArgsContainer;
 
+/**
+ * room跟场景相关的内容
+ */
 public abstract class BaseRoom extends MessageHandler<Room> implements IArgsContainer {
 
     private final ArgsContainer argsContainer = new ArgsContainer();
@@ -21,6 +24,11 @@ public abstract class BaseRoom extends MessageHandler<Room> implements IArgsCont
         this.handler = handler;
         this.roomId = roomId;
     }
+
+    /**
+     * 房间的初始化
+     */
+    protected abstract void initialize();
 
     public IRoomHandler getHandler() {
         return handler;

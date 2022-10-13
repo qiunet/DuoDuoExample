@@ -4,6 +4,10 @@ import com.game.example.basic.logic.scene.object.MovableObject;
 import com.game.example.basic.logic.scene.object.Player;
 import org.qiunet.flash.handler.context.sender.IChannelMessageSender;
 
+/**
+ * 房间的玩家对象
+ * 保存玩家在房间中的一些状态，如加入房间时间、房间游戏状态等
+ */
 public class RoomPlayer implements IChannelMessageSender {
     // 玩家跨服对象
     private final MovableObject player;

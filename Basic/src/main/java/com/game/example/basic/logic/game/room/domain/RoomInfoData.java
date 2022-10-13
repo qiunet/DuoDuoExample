@@ -9,9 +9,6 @@ import java.util.Map;
 
 /***
  * 房间信息
- *
- * @author qiunet
- * 2021/11/24 16:26
  */
 public class RoomInfoData {
 

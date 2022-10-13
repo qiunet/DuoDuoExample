@@ -2,14 +2,14 @@ package com.game.example.basic.logic.game.room.event.cross;
 
 import org.qiunet.cross.event.BaseCrossPlayerEventData;
 
-public class EnterRoomByIdEventData extends BaseCrossPlayerEventData {
+public class EnterRoomByIdEvent extends BaseCrossPlayerEventData {
 	/**
 	 * 房间ID
 	 */
 	private long roomId;
 
-	public static EnterRoomByIdEventData valueOf(long roomId) {
-		EnterRoomByIdEventData data = new EnterRoomByIdEventData();
+	public static EnterRoomByIdEvent valueOf(long roomId) {
+		EnterRoomByIdEvent data = new EnterRoomByIdEvent();
 		data.roomId = roomId;
 		return data;
 	}

@@ -25,7 +25,7 @@
 ####连接处理
 ```
 channelActive:
-实例化DSession并且绑定当前channel，同时注册channel的关闭监听[调用DSession的close方法(服务端断开连接也是调用此方法走登出流程)]
+实例化DSession并且绑定当前channel，同时注册channel的关闭监听[channel关闭会调用DSession的close方法(服务端断开连接也是调用此方法走登出流程)]
 同时channel也绑定DSession
 channel绑定MessageActor(具体类型在启动类参数中指定),游戏服直接创建PlayerActor且绑定DSession
 即每次连接成功都是新的DSession和PlayerActor
@@ -37,10 +37,10 @@ channelRead:
 
 新的连接成功后，在登录过程中调用PlayerActor#auth方法(已将旧的踢下线)
 0.PlayerActor绑定playerId
-1.创建PlayerDataLoader, PlayerActor绑定PlayerDataLoader
+1.创建PlayerDataLoader, PlayerActor绑定PlayerDataLoader，且注册到DataLoaderManager
 2.循环调度发起PlayerActor与玩法服的跨服连接心跳
 3.循环调度发起PlayerActor与客户端的连接心跳
-登录成功会给DSession注册close监听[服务端登出逻辑、看退出原因给10分钟重连时间、推送给客户端],
+登录成功会给DSession注册关闭监听[服务端登出逻辑、看退出原因给10分钟重连时间、推送给客户端],
 这个监听是在Dession的close方法中调用，即客户端断开连接或者服务端主动调用退出都会执行到这个监听器，调用完后会确保断开连接
 
 dataSupport从数据库中获取PlayerBo(如果时同账号肯定与原先不同对象)
@@ -51,4 +51,6 @@ dataSupport从数据库中获取PlayerBo(如果时同账号肯定与原先不同
 并将新的PlayerActor中的消息全部加入旧的PlayerActor。
 销毁新的PlayerActor,之后用的都是旧的PlayerActor
 
+新PlayerActor的PlayerDataLoader会在重连成功后走一遍入库流程再解绑DataLoaderManager
+旧PlayerActor的PlayerDataLoader会在其退出时走一遍入库流程再解绑，如果重连成功后重新注册到DataLoaderManager
 ```

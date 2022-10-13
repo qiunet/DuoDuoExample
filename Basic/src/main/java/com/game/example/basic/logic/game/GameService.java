@@ -2,7 +2,7 @@ package com.game.example.basic.logic.game;
 
 import com.game.example.basic.logic.game.room.domain.RoomInfoData;
 import com.game.example.basic.logic.game.room.event.PlayerRoomInfoRspEvent;
-import com.game.example.basic.logic.game.room.event.cross.EnterRoomByIdEventData;
+import com.game.example.basic.logic.game.room.event.cross.EnterRoomByIdEvent;
 import com.game.example.basic.logic.game.room.event.cross.EnterRoomCrossEvent;
 import com.game.example.basic.logic.game.room.event.cross.PlayerReconnectEvent;
 import com.game.example.basic.logic.game.room.event.cross.PlayerRoomInfoReqEvent;
@@ -120,7 +120,7 @@ public enum GameService {
     //加入指定房间
     public void joinRoomById(PlayerActor playerActor, RoomInfoData roomInfoData) {
         playerActor.crossToServer(roomInfoData.getServerId());
-        playerActor.fireCrossEvent(EnterRoomByIdEventData.valueOf(roomInfoData.getRoomId()));
+        playerActor.fireCrossEvent(EnterRoomByIdEvent.valueOf(roomInfoData.getRoomId()));
     }
 
     public void sendEnterRoomFailMessage(PlayerActor playerActor, IGameStatus status){

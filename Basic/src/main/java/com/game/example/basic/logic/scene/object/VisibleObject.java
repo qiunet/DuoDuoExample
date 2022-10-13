@@ -13,7 +13,6 @@ public abstract class VisibleObject <Owner extends VisibleObject<Owner>> extends
      */
     private final ObserverSupport<Owner> observerSupport = new ObserverSupport<>((Owner) this);
 
-
     public VisibleObject(ObjectType objectType, long objectId) {
         super(objectType, objectId);
     }
