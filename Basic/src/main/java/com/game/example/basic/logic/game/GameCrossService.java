@@ -91,7 +91,6 @@ public enum GameCrossService {
                 r.getHandler().playerBrokenEvent(r, actor);
             });
         } else {
-            // logic 服 拜访之类的.
             // event.getPlayer().getVal(Player.PLAYER_IN_ACTOR_KEY).getPosition().offline();
         }
     }

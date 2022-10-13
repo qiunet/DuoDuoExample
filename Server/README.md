@@ -22,4 +22,33 @@
 
 （客户端持有的ticket是登录服生成的。所以会与redis中相同，redis中PlayerPlatformData是登录凭证）
 ```
+####连接处理
+```
+channelActive:
+实例化DSession并且绑定当前channel，同时注册channel的关闭监听[调用DSession的close方法(服务端断开连接也是调用此方法走登出流程)]
+同时channel也绑定DSession
+channel绑定MessageActor(具体类型在启动类参数中指定),游戏服直接创建PlayerActor且绑定DSession
+即每次连接成功都是新的DSession和PlayerActor
 
+channelRead:
+从channel获取DSession，DSession获取PlayerActor并分发处理请求
+
+重连：
+
+新的连接成功后，在登录过程中调用PlayerActor#auth方法(已将旧的踢下线)
+0.PlayerActor绑定playerId
+1.创建PlayerDataLoader, PlayerActor绑定PlayerDataLoader
+2.循环调度发起PlayerActor与玩法服的跨服连接心跳
+3.循环调度发起PlayerActor与客户端的连接心跳
+登录成功会给DSession注册close监听[服务端登出逻辑、看退出原因给10分钟重连时间、推送给客户端],
+这个监听是在Dession的close方法中调用，即客户端断开连接或者服务端主动调用退出都会执行到这个监听器，调用完后会确保断开连接
+
+dataSupport从数据库中获取PlayerBo(如果时同账号肯定与原先不同对象)
+如果数据库的PlayerBo与此次客户端带的ticket相同走重连流程。
+
+向UserOnlineManager中传入playerId,当前连接绑定的PlayerActor进入重连操作
+将当前channel绑定旧的PlayerActor，将旧的PlayerActor绑定新的DSession
+并将新的PlayerActor中的消息全部加入旧的PlayerActor。
+销毁新的PlayerActor,之后用的都是旧的PlayerActor
+
+```
