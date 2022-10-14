@@ -16,7 +16,8 @@ import org.qiunet.flash.handler.context.status.StatusResultException;
 public abstract class BasicRoomHandler<REQ extends IChannelData> extends BaseTcpPbTransmitHandler<REQ> {
 
 	@Override
-	public void handler(PlayerActor playerActor, IPersistConnRequest<REQ> context) throws Exception {
+	public final void handler(PlayerActor playerActor, IPersistConnRequest<REQ> context) throws Exception {
+		// 不处理
 		throw StatusResultException.valueOf(GameStatus.ROOM_OPERATION_NOT_IN_ROOM);
 	}
 
