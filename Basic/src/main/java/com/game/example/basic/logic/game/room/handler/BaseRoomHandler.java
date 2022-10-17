@@ -21,19 +21,19 @@ public abstract class BaseRoomHandler implements IRoomHandler {
     @Override
     public void playerBrokenEvent(Room room, CrossPlayerActor playerActor) {
         logger.debug("玩家[{}]退出跨服！！！", playerActor.getPlayerId());
-        // 先推送房间状态.
+        // 同步玩家离线，推送视野变化
         Player player = Player.PLAYER_IN_ACTOR_KEY.get(playerActor);
-        // player.getPosition().offline();
+        player.getPosition().offline();
     }
 
     @Override
     public void playerReconnect(Room room, Player player) {
         logger.debug("玩家[{}]重连跨服！！！", player.getId());
         // 场景下线
-        // player.getPosition().offline();
+        player.getPosition().offline();
         // 玩家重连房间，状态等信息不变，推送房间状态即可.
         player.sendMessage(RoomInfoPush.valueOf(room.getSceneId(), room.buildRoomData()));
         // 推送视野
-        // player.getPosition().online();
+        player.getPosition().online();
     }
 }

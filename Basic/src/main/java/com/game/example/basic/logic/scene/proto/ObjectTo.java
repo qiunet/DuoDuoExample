@@ -3,6 +3,7 @@ package com.game.example.basic.logic.scene.proto;
 import com.baidu.bjf.remoting.protobuf.FieldType;
 import com.baidu.bjf.remoting.protobuf.annotation.Protobuf;
 import com.baidu.bjf.remoting.protobuf.annotation.ProtobufClass;
+import com.game.example.basic.logic.scene.object.VisibleObject;
 import org.qiunet.flash.handler.util.proto.CommonModuleProto;
 
 /***
@@ -23,6 +24,13 @@ public class ObjectTo {
 		data.objectId = objectId;
 		data.name = name;
 		return  data;
+	}
+
+	public static ObjectTo valueOf(VisibleObject<?> creature){
+		ObjectTo objectTo = new ObjectTo();
+		objectTo.objectId = creature.getObjectId();
+		objectTo.name = ""; // 在跨服登录鉴权后（SceneService），从redis中获取全局玩家数据并保存一份到Player对象中。其中可以获得名称
+		return objectTo;
 	}
 
 	public long getObjectId() {

@@ -28,7 +28,7 @@ channel绑定MessageActor(具体类型在启动类参数中指定),玩法服直�
 即每次连接成功都是新的DSession和CrossPlayerActor
 
 CrossPlayerActor在创建时给DSession注册关闭监听[触发CrossActorLogoutEvent事件(在DSession的close方法中调用)]
-鉴权后创建玩法服Player对象，CrossPlayerActor绑定Player
+SceneService在鉴权后创建玩法服Player对象，CrossPlayerActor绑定Player
 
 游戏服玩家与玩法服重连处理：
 

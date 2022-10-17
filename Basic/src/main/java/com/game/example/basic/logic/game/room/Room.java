@@ -7,6 +7,9 @@ import com.game.example.basic.logic.game.room.observer.IRoomEnterPlayer;
 import com.game.example.basic.logic.game.room.observer.IRoomQuitPlayer;
 import com.game.example.basic.logic.game.room.player.RoomPlayer;
 import com.game.example.basic.logic.game.room.proto.*;
+import com.game.example.basic.logic.scene.controller.ITransferControl;
+import com.game.example.basic.logic.scene.domain.Coordinate;
+import com.game.example.basic.logic.scene.domain.SceneInstance;
 import com.game.example.basic.logic.scene.object.MovableObject;
 import com.game.example.basic.logic.scene.object.Player;
 import com.game.example.common.constants.GameStatus;
@@ -25,7 +28,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class Room extends BaseRoom implements IObserverSupportOwner<Room> {
+public class Room extends BaseRoom implements ITransferControl, IObserverSupportOwner<Room> {
     // 玩家所在的房间 在Player身上的key
     public static final ArgumentKey<Room> ROOM = new ArgumentKey<>();
     /**
@@ -36,6 +39,11 @@ public class Room extends BaseRoom implements IObserverSupportOwner<Room> {
      * 场景内玩家的列表
      */
     private final Map<Long, RoomPlayer> players = Maps.newConcurrentMap();
+    /**
+     * 房间的场景
+     * 在同一个房间内有多个场景，可在房间内切换场景，同一个场景内才可能互相看见
+     */
+    private final Map<String, SceneInstance> sceneInstances = Maps.newConcurrentMap();
     /**
      * 房间的信息
      */
@@ -64,7 +72,9 @@ public class Room extends BaseRoom implements IObserverSupportOwner<Room> {
                 // 绑定player
                 ROOM.set(player, this);
                 RoomPlayer roomPlayer = addPlayer(player);
-                // TODO enterScene
+
+                // 进入场景
+                enterScene(player, roomInfoData.getSceneId(), new Coordinate());
 
                 // 注册监听CrossPlayerActor销毁的事件，在UserOnlineManager#onLogout触发
                 ObserverSupport<? extends AbstractUserActor> observerSupport = player.getUserActor().getObserverSupport();
@@ -189,5 +199,10 @@ public class Room extends BaseRoom implements IObserverSupportOwner<Room> {
     @Override
     public ObserverSupport<Room> getObserverSupport() {
         return observerSupport;
+    }
+
+    @Override
+    public SceneInstance getSceneInstance(String sceneId) {
+        return sceneInstances.computeIfAbsent(sceneId, handler::createSceneInstance);
     }
 }

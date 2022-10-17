@@ -11,8 +11,11 @@ import com.game.example.common.logger.GameLogger;
 import com.google.common.collect.Sets;
 import org.qiunet.data.db.loader.DataLoader;
 import org.qiunet.data.support.DbDataSupport;
+import org.qiunet.data.util.ServerType;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.flash.handler.common.player.UserOnlineManager;
+import org.qiunet.flash.handler.common.player.event.CrossPlayerDestroyEvent;
+import org.qiunet.flash.handler.common.player.event.CrossPlayerLogoutEvent;
 import org.qiunet.flash.handler.common.player.event.PlayerActorLogoutEvent;
 import org.qiunet.flash.handler.common.player.observer.IPlayerDestroy;
 import org.qiunet.flash.handler.context.status.StatusResultException;
@@ -23,6 +26,7 @@ import org.slf4j.Logger;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public enum PlayerService {
     instance;
@@ -144,6 +148,8 @@ public enum PlayerService {
         PlayerActor playerActor = data.getPlayer();
         playerId2Actor.remove(playerActor.getPlayerId());
 
+        // 省略redis全局玩家信息的登录状态、登出时间修改
+
         if (data.getCause().needWaitConnect()) {
             PlayerPlatformData playerPlatformData = PlayerPlatformData.readData(playerActor.getPlayerId());
             String ticket = playerPlatformData == null ? null : playerPlatformData.getTicket();
@@ -159,24 +165,31 @@ public enum PlayerService {
         PlayerPlatformData.del(playerActor.getPlayerId());
     }
 
-    /*private static PlayerGlobalInfo refreshPlayerInfo(PlayerActor player) {
-        PlayerBo playerBo = player.getData(PlayerBo.class);
-        PlayerGlobalInfo data = new PlayerGlobalInfo();
-
-        data.setCurrServerId(ServerNodeManager.getCurrServerId());
-        if(playerBo == null){
-            data.setPlayerId(player.getPlayerId());
-        }else{
-            data.setIcon(String.valueOf(playerBo.getDo().getIcon()));
-            data.setPlayerId(playerBo.getDo().getPlayer_id());
-            data.setIntro(playerBo.getDo().getIntro());
-            data.setName(playerBo.getDo().getName());
-            data.setAvatar(playerBo.getDo().getAvatar());
+    /**
+     * 处理logic跨服退出
+     */
+    @EventListener
+    private void crossLogout(CrossPlayerLogoutEvent event) {
+        ServerType serverType = ServerType.getServerType(event.getServerId());
+        if (serverType != ServerType.LOGIC) {
+            return;
         }
-        data.setLastLoginDt((int) DateUtil.currSeconds());
-        data.setServerId(ServerConfig.getServerId());
-        data.setOffline(false);
-        data.sendToRedis();
-        return data;
-    }*/
+        event.getPlayer().switchCross(null);
+    }
+
+    /**
+     * 处理跨服销毁
+     * 跨服已经销毁对象. 通知player这.
+     */
+    @EventListener
+    private void crossDestroy(CrossPlayerDestroyEvent event) {
+        // 延缓一秒关闭. 给玩法服一些时间处理事情
+        event.getPlayer().scheduleMessage(p -> {
+            ServerType serverType = ServerType.getServerType(event.getServerId());
+            event.getPlayer().quitCross(serverType, CloseCause.DESTROY);
+        }, 1, TimeUnit.SECONDS);
+    }
+
+
+
 }

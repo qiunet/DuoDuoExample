@@ -70,4 +70,21 @@ public interface ProtocolID {
             int JOIN_ROOM_REQ = 8004;
         }
     }
+
+    //地图相关  模块ID: 3
+    interface Map {
+        // 视野变化: 有人移出
+        int KNOW_LIST_DEL_PUSH = 3000000;
+        // 视野变化: 有人进入
+        int KNOW_LIST_ADD_PUSH = 3000001;
+
+        // 场景切换推送
+        int SCENE_CHANGE_PUSH = 3000004;
+        // 在场景下线
+        int SCENE_OFFLINE_PUSH = 3000007;
+
+        // 地图切换请求
+        int TRANSPORT_REQ = 3002;
+        int TRANSPORT_RSP = 3002001;
+    }
 }
