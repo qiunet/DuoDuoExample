@@ -29,6 +29,10 @@ public abstract class BaseRoom extends MessageHandler<Room> implements IArgsCont
      * 房间的初始化
      */
     protected abstract void initialize();
+    /**
+     * 500 毫秒 刷新
+     */
+    protected abstract void update(float ptf);
 
     public IRoomHandler getHandler() {
         return handler;

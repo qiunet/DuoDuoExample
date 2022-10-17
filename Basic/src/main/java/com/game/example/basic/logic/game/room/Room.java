@@ -25,6 +25,7 @@ import org.qiunet.utils.exceptions.CustomException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -48,6 +49,10 @@ public class Room extends BaseRoom implements ITransferControl, IObserverSupport
      * 房间的信息
      */
     private final RoomInfoData roomInfoData;
+    /**
+     * 帧数维护
+     */
+    private final AtomicInteger frameMaker = new AtomicInteger();
 
     public Room(IRoomHandler roomHandler, long roomId, String sceneId, boolean privacy) {
         super(roomHandler, roomId);
@@ -164,6 +169,30 @@ public class Room extends BaseRoom implements ITransferControl, IObserverSupport
     @Override
     protected void initialize() {
         handler.initialize(this);
+    }
+
+    /**
+     * 必须在Room线程调用
+     */
+    @Override
+    protected void update(float ptf) {
+        for (SceneInstance sceneInstance : this.sceneInstances.values()) {
+            sceneInstance.playerActionBroadcast();
+        }
+        this.frameLogic(ptf);
+    }
+
+    /**
+     * 场景一帧的逻辑
+     */
+    private void frameLogic(float ptf) {
+        this.handler.frameLogic(this, ptf);
+        frameMaker.incrementAndGet();
+    }
+
+    // 获得当前帧数
+    public int getFrameNumber(){
+        return frameMaker.get();
     }
 
     @Override
