@@ -16,7 +16,7 @@ public class TransferHandler extends BaseTcpPbTransmitHandler<TransportReq> {
 
 	@Override
 	public void handler(PlayerActor playerActor, IPersistConnRequest<TransportReq> context) throws Exception {
-		throw new RuntimeException();
+
 	}
 
 	@Override

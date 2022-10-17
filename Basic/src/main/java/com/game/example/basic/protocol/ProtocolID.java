@@ -83,6 +83,10 @@ public interface ProtocolID {
         // 在场景下线
         int SCENE_OFFLINE_PUSH = 3000007;
 
+        // 移动指定位置
+        int SCENE_POSITION_REQ = 3001;
+        int SCENE_POSITION_RSP = 3001001;
+
         // 地图切换请求
         int TRANSPORT_REQ = 3002;
         int TRANSPORT_RSP = 3002001;

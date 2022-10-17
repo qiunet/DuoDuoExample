@@ -59,10 +59,10 @@ public final class SceneInstance extends MessageHandler<SceneInstance> {
     }
 
     // 根据坐标计算出来在哪块区域.
-    public String calRegionId(float x, float z) {
+    public String calRegionId(float x, float y) {
         int xID = (int) Math.floor(x / this.regionGridSize);
-        int zSize = (int) Math.floor(z / this.regionGridSize);
-        return MapUtil.buildRegionId(xID, zSize);
+        int ySize = (int) Math.floor(y / this.regionGridSize);
+        return MapUtil.buildRegionId(xID, ySize);
     }
 
     // 计算周围的格子，并处理
