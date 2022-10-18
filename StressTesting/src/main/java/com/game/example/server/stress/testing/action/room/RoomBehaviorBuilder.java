@@ -15,6 +15,7 @@ public class RoomBehaviorBuilder implements IBehaviorBuilder<Robot> {
         SelectorExecutor<Robot> selectorExecutor = new SelectorExecutor<>(new AuthCondition());
         selectorExecutor.addChild(
                 new JoinRoomAction(new JoinRoomCondition()),
+                new RoomMoveAction(new QuitRoomCondition()),
                 new RoomQuitAction(new QuitRoomCondition())
         );
         return selectorExecutor;

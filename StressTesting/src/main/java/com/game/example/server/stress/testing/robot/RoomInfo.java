@@ -4,9 +4,13 @@ import com.game.example.basic.logic.game.room.proto.RoomData;
 
 public class RoomInfo {
 
+    private static int needMoveCount = 5;
+
     private String sceneId;
 
     private RoomData roomData;
+
+    private int moveCount;
 
     public final void clear() {
         this.roomData = null;
@@ -27,5 +31,17 @@ public class RoomInfo {
 
     public void setRoomData(RoomData roomData) {
         this.roomData = roomData;
+    }
+
+    public int getMoveCount() {
+        return moveCount;
+    }
+
+    public void setMoveCount(int moveCount) {
+        this.moveCount = moveCount;
+    }
+
+    public static int getNeedMoveCount() {
+        return needMoveCount;
     }
 }

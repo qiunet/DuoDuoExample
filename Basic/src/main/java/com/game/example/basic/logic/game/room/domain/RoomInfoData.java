@@ -35,6 +35,9 @@ public class RoomInfoData {
 
 	private int maxPlayerLimit = 5;
 
+	public RoomInfoData() {
+	}
+
 	public RoomInfoData(Room room, String sceneId, boolean privacy) {
 		this.serverId = ServerNodeManager.getCurrServerId();
 		this.playerNum = room.playerSize();

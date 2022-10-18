@@ -22,7 +22,7 @@ public abstract class VisibleObject <Owner extends VisibleObject<Owner>> extends
     private final KnowList<Owner> knowList = new KnowList<>((Owner) this);
     /**
      * 行为控制器
-     * 
+     *
      */
     private final BehaviorController<Owner> behaviorController;
     /**
@@ -33,6 +33,7 @@ public abstract class VisibleObject <Owner extends VisibleObject<Owner>> extends
     public VisibleObject(ObjectType objectType, long objectId) {
         super(objectType, objectId);
         this.behaviorController = (BehaviorController<Owner>) new PlayerBehaviorController();
+        this.behaviorController.setOwner((Owner) this);
         this.position = new Position<>((Owner) this);
     }
 

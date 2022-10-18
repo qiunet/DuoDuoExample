@@ -38,7 +38,7 @@ public enum GameService {
             // 预留点时间给退出房间
             event.getPlayer().scheduleMessage((p) -> {
                 this.joinOrCreateRoomRequest(p, event.isPrivacy());
-            }, 10, TimeUnit.MILLISECONDS);
+            }, 100, TimeUnit.MILLISECONDS);
         // }
     }
 

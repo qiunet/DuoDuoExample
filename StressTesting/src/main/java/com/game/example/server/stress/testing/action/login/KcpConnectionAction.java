@@ -22,7 +22,7 @@ public class KcpConnectionAction extends RobotRequestAction {
     private boolean bindSuccess;
 
     public KcpConnectionAction(IConditions<Robot> preConditions) {
-        super(preConditions);
+        super(preConditions, TestingConstant.GAME_KCP_CONNECTOR_NAME);
     }
 
     @Override
