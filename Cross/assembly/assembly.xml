@@ -1,0 +1,54 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+	<id>1.0.0.release</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<dependencySets>
+		<dependencySet>
+			<useProjectArtifact>true</useProjectArtifact>
+			<outputDirectory>lib</outputDirectory>
+			<!--指定只打包多多的jar, 如果注释,则将所有lib打包-->
+			<includes>
+				<include>com.game.example:*</include>
+				<include>io.github.qiunet:*</include>
+			</includes>
+		</dependencySet>
+<!--		<dependencySet>-->
+<!--			<useProjectArtifact>true</useProjectArtifact>-->
+<!--			<outputDirectory>common-lib</outputDirectory>-->
+<!--			&lt;!&ndash;指定只打包多多的jar, 如果注释,则将所有lib打包&ndash;&gt;-->
+<!--			<excludes>-->
+<!--				<exclude>com.xy.game.server:*</exclude>-->
+<!--				<exclude>io.github.qiunet:*</exclude>-->
+<!--			</excludes>-->
+<!--		</dependencySet>-->
+	</dependencySets>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.outputDirectory}</directory>
+			<includes>
+				<include>config/**</include>
+				<include>*.xml</include>
+				<include>*.conf</include>
+				<include>*.txt</include>
+				<include>*.properties</include>
+			</includes>
+			<excludes>
+				<exclude>logback-test.xml</exclude>
+				<exclude>server.conf</exclude>
+			</excludes>
+			<outputDirectory>conf</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/assembly/shell/</directory>
+			<outputDirectory>bin</outputDirectory>
+			<fileMode>0755</fileMode>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/assembly/bat/</directory>
+			<outputDirectory>bin/bat</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>
