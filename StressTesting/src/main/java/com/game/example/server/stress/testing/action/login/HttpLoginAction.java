@@ -22,9 +22,9 @@ public class HttpLoginAction extends RobotRequestAction {
     @Override
     protected ActionStatus execute() {
         HttpRequest.post(ServerConfig.getInstance().getString("server.address"))
-                .withJsonData((Map) ImmutableMap.of("uid", ((Robot)getOwner()).getAccount()))
-                .asyncExecutor(response -> getRobotData().setHttpLoginResponse(
-                        JsonUtil.getGeneralObj(response.body(), LoginResponse.class)));
+                .withJsonData(ImmutableMap.of("uid", getOwner().getAccount()))
+                .asyncExecutor((call, response) -> getRobotData().setHttpLoginResponse(
+                        JsonUtil.getGeneralObj(response.body().string(), LoginResponse.class)));
 
         return ActionStatus.RUNNING;
     }

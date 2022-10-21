@@ -3,7 +3,6 @@ package com.game.example.login;
 import com.game.example.common.utils.redis.RedisGlobalUtil;
 import org.qiunet.cross.common.contants.ScannerParamKey;
 import org.qiunet.data.util.ServerConfig;
-import org.qiunet.flash.handler.context.header.ProtocolHeaderType;
 import org.qiunet.flash.handler.netty.server.BootstrapServer;
 import org.qiunet.flash.handler.netty.server.hook.DefaultHook;
 import org.qiunet.flash.handler.netty.server.hook.Hook;
@@ -31,7 +30,6 @@ public class LoginServerBootstrap {
 
             BootstrapServer server = BootstrapServer.createBootstrap(hook);
             server.httpListener(HttpBootstrapParams.custom()
-                    .setProtocolHeaderType(ProtocolHeaderType.server)
                     .setPort(ServerConfig.getServerPort())
                     .setServerName("登录服").build())
                     .await();
