@@ -8,12 +8,12 @@ import com.game.example.basic.logic.pack.proto.*;
 import com.google.common.collect.Lists;
 import org.qiunet.data.db.loader.DataLoader;
 import org.qiunet.data.support.DbDataListSupport;
-import org.qiunet.flash.handler.common.IThreadSafe;
 import org.qiunet.flash.handler.common.player.IPlayer;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.function.consume.ConsumeEventData;
 import org.qiunet.function.reward.GainRewardEventData;
 import org.qiunet.utils.listener.event.EventListener;
+import org.qiunet.utils.thread.IThreadSafe;
 
 import java.util.List;
 import java.util.Map;

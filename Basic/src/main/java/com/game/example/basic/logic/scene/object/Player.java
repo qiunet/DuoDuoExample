@@ -45,13 +45,13 @@ public class Player extends MovableObject<Player> implements IChannelMessageSend
     }
 
     @Override
-    public void addMessage(IMessage<Player> msg) {
+    public boolean addMessage(IMessage<Player> msg) {
         if (userActor.isDestroyed()){
             ((CrossPlayerActor) userActor).getObserverSupport().syncFire(IPlayerDestroy.class, i -> i.destroyActor(this.userActor));
             this.getPosition().offline();
             this.destroy();
         }
-        userActor.addMessage(p -> msg.execute(this));
+        return userActor.addMessage(p -> msg.execute(this));
     }
 
     /**

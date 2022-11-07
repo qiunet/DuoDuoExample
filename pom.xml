@@ -19,7 +19,7 @@
 
 
     <properties>
-        <duoduo.version>7.0.7</duoduo.version>
+        <duoduo.version>7.0.8</duoduo.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <kotlin.version>1.6.20-RC</kotlin.version>

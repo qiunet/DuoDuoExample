@@ -1,6 +1,6 @@
 package com.game.example.common.data;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.google.common.collect.Maps;
 import org.qiunet.utils.json.JsonUtil;
 

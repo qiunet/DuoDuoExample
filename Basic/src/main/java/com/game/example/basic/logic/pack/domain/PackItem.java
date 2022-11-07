@@ -1,7 +1,7 @@
 package com.game.example.basic.logic.pack.domain;
 
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.baidu.bjf.remoting.protobuf.annotation.Ignore;
 import com.game.example.basic.logic.pack.enums.PackType;
 import com.game.example.basic.logic.pack.proto.PackItemTo;

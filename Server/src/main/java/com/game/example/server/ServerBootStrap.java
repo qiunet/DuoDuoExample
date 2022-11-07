@@ -7,7 +7,7 @@ import org.qiunet.flash.handler.context.header.CompatibleProtocolHeader;
 import org.qiunet.flash.handler.netty.server.BootstrapServer;
 import org.qiunet.flash.handler.netty.server.hook.DefaultHook;
 import org.qiunet.flash.handler.netty.server.hook.Hook;
-import org.qiunet.flash.handler.netty.server.param.TcpBootstrapParams;
+import org.qiunet.flash.handler.netty.server.param.ServerBootStrapParam;
 import org.qiunet.flash.handler.netty.server.param.adapter.IStartupContext;
 import org.qiunet.utils.config.ConfigFileUtil;
 import org.qiunet.utils.data.IKeyValueData;
@@ -31,20 +31,15 @@ public class ServerBootStrap {
                     .scanner("com.game.example");
 
             BootstrapServer server = BootstrapServer.createBootstrap(hook);
-            server.tcpListener(TcpBootstrapParams.custom()
+            server.listener(ServerBootStrapParam.newBuild("游戏服", ServerConfig.getServerPort())
+					.setKcpBootStrapParam(ServerBootStrapParam.KcpBootstrapParam.newBuild().setPortCount(1).build())
                     .setStartupContext(IStartupContext.SERVER_STARTUP_CONTEXT)
 					// 方便老工具使用. 实际可以不用下面这行. 会默认使用 DefaultProtocolHeader
 					.setProtocolHeader(CompatibleProtocolHeader.instance)
-					.setPort(ServerConfig.getServerPort())
-                    .setServerName("游戏服")
-                    .setEncryption(false)
-                    .setUdpOpen()
                     .build())
                     // 节点交互
-                    .tcpListener(TcpBootstrapParams.custom()
+                    .listener(ServerBootStrapParam.newBuild("节点通讯服务", ServerConfig.getNodePort())
                             .setStartupContext(IStartupContext.DEFAULT_CROSS_NODE_START_CONTEXT)
-                            .setPort(ServerConfig.getNodePort())
-                            .setServerName("节点通讯")
                             .build())
                     .await();
             return;

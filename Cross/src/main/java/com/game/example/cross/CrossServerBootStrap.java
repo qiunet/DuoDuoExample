@@ -6,7 +6,7 @@ import org.qiunet.data.util.ServerConfig;
 import org.qiunet.flash.handler.netty.server.BootstrapServer;
 import org.qiunet.flash.handler.netty.server.hook.DefaultHook;
 import org.qiunet.flash.handler.netty.server.hook.Hook;
-import org.qiunet.flash.handler.netty.server.param.TcpBootstrapParams;
+import org.qiunet.flash.handler.netty.server.param.ServerBootStrapParam;
 import org.qiunet.flash.handler.netty.server.param.adapter.IStartupContext;
 import org.qiunet.utils.config.ConfigFileUtil;
 import org.qiunet.utils.data.IKeyValueData;
@@ -28,12 +28,8 @@ public class CrossServerBootStrap {
 					.scanner("com.game.example");
 
 			BootstrapServer.createBootstrap(hook)
-					.tcpListener(TcpBootstrapParams.custom().setStartupContext(IStartupContext.DEFAULT_CROSS_START_CONTEXT)
-							.setPort(ServerConfig.getServerPort())
-							.build())
-					.tcpListener(TcpBootstrapParams.custom().setStartupContext(IStartupContext.DEFAULT_CROSS_NODE_START_CONTEXT)
-							.setPort(ServerConfig.getNodePort())
-							.build())
+					.listener(ServerBootStrapParam.newBuild("玩法服", ServerConfig.getServerPort()).setStartupContext(IStartupContext.DEFAULT_CROSS_START_CONTEXT).build())
+					.listener(ServerBootStrapParam.newBuild("服务器通讯节点", ServerConfig.getNodePort()).setStartupContext(IStartupContext.DEFAULT_CROSS_NODE_START_CONTEXT).build())
 					.await();
 			return;
 		}

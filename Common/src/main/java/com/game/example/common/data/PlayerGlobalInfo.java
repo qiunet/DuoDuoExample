@@ -1,6 +1,6 @@
 package com.game.example.common.data;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.game.example.common.utils.redis.RedisGlobalUtil;
 import org.qiunet.data.util.ServerType;
 import org.qiunet.utils.date.DateUtil;

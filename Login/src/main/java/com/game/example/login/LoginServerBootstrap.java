@@ -6,7 +6,7 @@ import org.qiunet.data.util.ServerConfig;
 import org.qiunet.flash.handler.netty.server.BootstrapServer;
 import org.qiunet.flash.handler.netty.server.hook.DefaultHook;
 import org.qiunet.flash.handler.netty.server.hook.Hook;
-import org.qiunet.flash.handler.netty.server.param.HttpBootstrapParams;
+import org.qiunet.flash.handler.netty.server.param.ServerBootStrapParam;
 import org.qiunet.utils.config.ConfigFileUtil;
 import org.qiunet.utils.data.IKeyValueData;
 import org.qiunet.utils.scanner.ClassScanner;
@@ -29,10 +29,7 @@ public class LoginServerBootstrap {
                     .scanner("com.game.example.login");
 
             BootstrapServer server = BootstrapServer.createBootstrap(hook);
-            server.httpListener(HttpBootstrapParams.custom()
-                    .setPort(ServerConfig.getServerPort())
-                    .setServerName("登录服").build())
-                    .await();
+            server.listener(ServerBootStrapParam.newBuild("登录服", ServerConfig.getServerPort()).build()).await();
         } else {
             IKeyValueData<Object, Object> keyValueData = ConfigFileUtil.loadConfig(ServerConfig.CONFIG_FILE_NAME);
             if ("stop".equals(cmd)) {

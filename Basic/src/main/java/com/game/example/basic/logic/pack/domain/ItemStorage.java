@@ -1,6 +1,5 @@
 package com.game.example.basic.logic.pack.domain;
 
-import com.alibaba.fastjson.JSON;
 import com.game.example.basic.logic.id_builder.enums.IDBuilderType;
 import com.game.example.basic.logic.pack.entity.PackBo;
 import com.game.example.basic.logic.pack.enums.PackType;
@@ -31,7 +30,7 @@ public class ItemStorage {
 
 		List<PackItem> list = Collections.emptyList();
 		if (! StringUtil.isEmpty(packBo.getDo().getData())) {
-			list = JSON.parseArray(packBo.getDo().getData(), PackItem.class, JsonUtil.DEFAULT_PARSER_CONFIG);
+			list = JsonUtil.getGeneralList(packBo.getDo().getData(), PackItem.class);
 		}
 		this.items = list.stream().peek(item -> item.itemStorage = this).collect(Collectors.toMap(PackItem::getUid, Function.identity()));
 		this.itemCounts = this.items.values().stream().collect(Collectors.groupingBy(
