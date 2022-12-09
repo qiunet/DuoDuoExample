@@ -66,6 +66,11 @@ public class PackItem implements IRealReward {
 	}
 
 	@Override
+	public int getUniqueId() {
+		return uid;
+	}
+
+	@Override
 	public int getCfgId() {
 		return resId;
 	}

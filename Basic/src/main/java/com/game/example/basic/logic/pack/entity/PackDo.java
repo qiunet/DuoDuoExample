@@ -11,7 +11,7 @@ import org.qiunet.data.db.entity.DbEntityList;
 * 对象为自动创建 不要修改
 */
 @Alias("PackDo")
-@Table(name = "pack", dbSource = "basic")
+@Table(name = "pack", keyName = "player_id", subKeyName = "type", dbSource = "basic")
 public class PackDo extends DbEntityList<Long, Integer> {
 	@Column(comment = "玩家id", isKey = true)
 	private long player_id;
@@ -57,17 +57,7 @@ public class PackDo extends DbEntityList<Long, Integer> {
 	}
 
 	@Override
-	public String keyFieldName() {
-		return "player_id";
-	}
-
-	@Override
 	public Integer subKey() {
 		return type;
-	}
-
-	@Override
-	public String subKeyFieldName() {
-		return "type";
 	}
 }

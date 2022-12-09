@@ -10,7 +10,7 @@ import org.qiunet.data.db.entity.DbEntity;
  * 玩家数据表
  */
 @Alias("PlayerDo")
-@Table(name = "player", comment="玩家表", dbSource = "basic")
+@Table(name = "player", keyName = "player_id", comment="玩家表", dbSource = "basic")
 public class PlayerDo extends DbEntity<Long> {
 	@Column(comment = "平台的玩家id", isKey = true)
 	private long player_id;
@@ -102,10 +102,5 @@ public class PlayerDo extends DbEntity<Long> {
 	@Override
 	public Long key() {
 		return player_id;
-	}
-
-	@Override
-	public String keyFieldName() {
-		return "player_id";
 	}
 }
