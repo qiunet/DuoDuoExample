@@ -32,8 +32,11 @@ public class ServerBootStrap {
 
             BootstrapServer server = BootstrapServer.createBootstrap(hook);
             server.listener(ServerBootStrapConfig.newBuild("游戏服", ServerConfig.getServerPort())
-					.setKcpBootStrapConfig(ServerBootStrapConfig.KcpBootstrapConfig.newBuild().setPortCount(1).build())
-                    .setStartupContext(IStartupContext.SERVER_STARTUP_CONTEXT)
+					.setTcpBootStrapConfig(
+						ServerBootStrapConfig.TcpBootstrapConfig.newBuild()
+						.setUdpOpen(ServerBootStrapConfig.KcpBootstrapConfig.newBuild().setPortCount(1).build())
+						.build()
+					).setStartupContext(IStartupContext.SERVER_STARTUP_CONTEXT)
 					// 方便老工具使用. 实际可以不用下面这行. 会默认使用 DefaultProtocolHeader
 					.setProtocolHeader(CompatibleProtocolHeader.instance)
                     .build())
