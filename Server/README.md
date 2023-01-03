@@ -1,7 +1,7 @@
-###游戏服
+### 游戏服
 > 启动类ServerBootstrap
 
-####登录游戏服流程
+#### 登录游戏服流程
 1. 客户端发送登录的http请求到登录服，登陆服将PlayerPlatformData[含有ticket(登录服在每次请求登录时生成新的)]保存到redis中，
 并响应客户端LoginResponse[包含ip、port、ticket]
 2. 客户端根据登录服响应的ip、端口等用tcp协议连接对应的游戏服
@@ -22,7 +22,7 @@
 
 （客户端持有的ticket是登录服生成的。所以会与redis中相同，redis中PlayerPlatformData是登录凭证）
 ```
-####连接处理
+#### 连接处理
 ```
 channelActive:
 实例化DSession并且绑定当前channel，同时注册channel的关闭监听[channel关闭会调用DSession的close方法(服务端断开连接也是调用此方法走登出流程)]
