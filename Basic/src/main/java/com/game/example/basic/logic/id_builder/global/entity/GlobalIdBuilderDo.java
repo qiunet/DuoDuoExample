@@ -11,7 +11,7 @@ import org.qiunet.data.db.entity.DbEntity;
 * 对象为自动创建 不要修改
 */
 @Alias("GlobalIdBuilderDo")
-@Table(name = "global_id_builder", comment="全局id生成表", dbSource = "basic")
+@Table(name = "global_id_builder", keyName = "type", comment="全局id生成表", dbSource = "basic")
 public class GlobalIdBuilderDo extends DbEntity<Integer> {
 	@Column(comment = "类型", isKey = true)
 	private int type;
@@ -44,10 +44,5 @@ public class GlobalIdBuilderDo extends DbEntity<Integer> {
 	@Override
 	public Integer key() {
 		return type;
-	}
-
-	@Override
-	public String keyFieldName() {
-		return "type";
 	}
 }

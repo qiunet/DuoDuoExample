@@ -4,9 +4,9 @@ import com.game.example.common.utils.redis.RedisGlobalUtil;
 import org.qiunet.cross.common.contants.ScannerParamKey;
 import org.qiunet.data.util.ServerConfig;
 import org.qiunet.flash.handler.netty.server.BootstrapServer;
+import org.qiunet.flash.handler.netty.server.config.ServerBootStrapConfig;
 import org.qiunet.flash.handler.netty.server.hook.DefaultHook;
 import org.qiunet.flash.handler.netty.server.hook.Hook;
-import org.qiunet.flash.handler.netty.server.param.ServerBootStrapParam;
 import org.qiunet.utils.config.ConfigFileUtil;
 import org.qiunet.utils.data.IKeyValueData;
 import org.qiunet.utils.scanner.ClassScanner;
@@ -29,7 +29,7 @@ public class LoginServerBootstrap {
                     .scanner("com.game.example.login");
 
             BootstrapServer server = BootstrapServer.createBootstrap(hook);
-            server.listener(ServerBootStrapParam.newBuild("登录服", ServerConfig.getServerPort()).build()).await();
+            server.listener(ServerBootStrapConfig.newBuild("登录服", ServerConfig.getServerPort()).build()).await();
         } else {
             IKeyValueData<Object, Object> keyValueData = ConfigFileUtil.loadConfig(ServerConfig.CONFIG_FILE_NAME);
             if ("stop".equals(cmd)) {

@@ -13,7 +13,7 @@ import com.game.example.basic.logic.player.PlayerService;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.flash.handler.context.request.persistconn.IPersistConnRequest;
 import org.qiunet.flash.handler.context.status.StatusResultException;
-import org.qiunet.flash.handler.netty.server.param.adapter.message.StatusTipsRsp;
+import org.qiunet.flash.handler.netty.server.config.adapter.message.StatusTipsRsp;
 
 public class RegisterHandler extends GameHandler<RegisterReq> {
 

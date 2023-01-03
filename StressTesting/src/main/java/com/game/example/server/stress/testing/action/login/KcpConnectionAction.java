@@ -4,7 +4,7 @@ import com.game.example.common.logger.GameLogger;
 import com.game.example.server.stress.testing.TestingConstant;
 import com.game.example.server.stress.testing.action.RobotRequestAction;
 import org.qiunet.flash.handler.context.session.ISession;
-import org.qiunet.flash.handler.netty.client.param.KcpClientParams;
+import org.qiunet.flash.handler.netty.client.param.KcpClientConfig;
 import org.qiunet.flash.handler.netty.server.kcp.shakehands.message.KcpBindAuthReq;
 import org.qiunet.flash.handler.netty.server.kcp.shakehands.message.KcpBindAuthRsp;
 import org.qiunet.flash.handler.netty.server.kcp.shakehands.message.KcpTokenReq;
@@ -44,7 +44,7 @@ public class KcpConnectionAction extends RobotRequestAction {
     @TestResponse
     public final void kcpTokenRsp(KcpTokenRsp rsp) {
         getRobotData().setKcpTokenRsp(rsp);
-        ISession connector = this.connector(KcpClientParams.custom()
+        ISession connector = this.connector(KcpClientConfig.custom()
                 .setAddress(getRobotData().getHttpLoginResponse().getServerHost(), rsp.getPort())
                 .setConvId(rsp.getConvId())
                 .setEncryption(false).build());

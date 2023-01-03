@@ -10,8 +10,8 @@ import org.qiunet.data.db.loader.DataLoader;
 import org.qiunet.data.support.DbDataListSupport;
 import org.qiunet.flash.handler.common.player.IPlayer;
 import org.qiunet.flash.handler.common.player.PlayerActor;
-import org.qiunet.function.consume.ConsumeEventData;
-import org.qiunet.function.reward.GainRewardEventData;
+import org.qiunet.function.consume.ConsumeEvent;
+import org.qiunet.function.reward.GainRewardEvent;
 import org.qiunet.utils.listener.event.EventListener;
 import org.qiunet.utils.thread.IThreadSafe;
 
@@ -24,15 +24,15 @@ public enum PackService {
 	private final DbDataListSupport<Long, Integer, PackDo, PackBo> dataSupport = new DbDataListSupport<>(PackDo.class, PackBo::new);
 
 	@EventListener
-	private void consumeEvent(ConsumeEventData eventData) {
+	private void consumeEvent(ConsumeEvent eventData) {
 		IThreadSafe obj = eventData.getContext().getObj();
 		if (obj instanceof PlayerActor) {
 			this.collectPackUpdate(((PlayerActor) obj));
 		}
 	}
 	@EventListener
-	private void gainReward(GainRewardEventData eventData) {
-		IPlayer player = eventData.getPlayer();
+	private void gainReward(GainRewardEvent eventData) {
+		IPlayer player = (IPlayer) eventData.getContext().getPlayer();
 		if (player instanceof PlayerActor) {
 			this.collectPackUpdate(((PlayerActor) player));
 		}

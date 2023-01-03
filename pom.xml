@@ -20,7 +20,7 @@
 
     <properties>
         <project.basic.module.resources.dir>${project.basedir}/../Basic/src/main/resources</project.basic.module.resources.dir>
-        <duoduo.version>7.0.8</duoduo.version>
+        <duoduo.version>7.0.9</duoduo.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <kotlin.version>1.6.20-RC</kotlin.version>
@@ -77,11 +77,6 @@
                 <artifactId>logback-classic</artifactId>
                 <version>1.2.3</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>4.5.13</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -107,18 +102,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>*.conf</exclude>
-                        <exclude>*.xml</exclude>
-                        <exclude>*.txt</exclude>
-                        <exclude>config/**</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>

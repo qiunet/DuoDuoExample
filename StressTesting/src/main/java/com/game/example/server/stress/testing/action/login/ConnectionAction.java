@@ -2,11 +2,11 @@ package com.game.example.server.stress.testing.action.login;
 
 import com.game.example.server.stress.testing.action.RobotRequestAction;
 import org.qiunet.flash.handler.context.session.ISession;
-import org.qiunet.flash.handler.netty.client.param.TcpClientParams;
+import org.qiunet.flash.handler.netty.client.param.TcpClientConfig;
+import org.qiunet.flash.handler.netty.server.config.adapter.message.ClockTickPush;
 import org.qiunet.flash.handler.netty.server.constants.ServerConstants;
 import org.qiunet.flash.handler.netty.server.message.ConnectionReq;
 import org.qiunet.flash.handler.netty.server.message.ConnectionRsp;
-import org.qiunet.flash.handler.netty.server.param.adapter.message.ClockTickPush;
 import org.qiunet.function.ai.enums.ActionStatus;
 import org.qiunet.function.condition.IConditions;
 import org.qiunet.game.test.response.TestResponse;
@@ -21,7 +21,7 @@ public class ConnectionAction extends RobotRequestAction {
 
     @Override
     protected ActionStatus execute() {
-        ISession connector = this.connector(TcpClientParams.custom()
+        ISession connector = this.connector(TcpClientConfig.custom()
                 .setAddress(getRobotData().getHttpLoginResponse().getServerHost(), getRobotData().getHttpLoginResponse().getServerPort())
                 .setEncryption(false)
                 .build());

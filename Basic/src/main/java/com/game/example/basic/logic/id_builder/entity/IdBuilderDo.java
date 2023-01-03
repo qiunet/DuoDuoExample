@@ -10,7 +10,7 @@ import org.qiunet.data.db.entity.DbEntityList;
 * 对象为自动创建 不要修改
 */
 @Alias("IdBuilderDo")
-@Table(name = "id_builder", comment="个人相关的id生成表", dbSource = "basic")
+@Table(name = "id_builder", keyName = "player_id", subKeyName = "type", comment="个人相关的id生成表", dbSource = "basic")
 public class IdBuilderDo extends DbEntityList<Long, Integer> {
 	@Column(comment = "玩家id", isKey = true)
 	private long player_id;
@@ -56,17 +56,7 @@ public class IdBuilderDo extends DbEntityList<Long, Integer> {
 	}
 
 	@Override
-	public String keyFieldName() {
-		return "player_id";
-	}
-
-	@Override
 	public Integer subKey() {
 		return type;
-	}
-
-	@Override
-	public String subKeyFieldName() {
-		return "type";
 	}
 }

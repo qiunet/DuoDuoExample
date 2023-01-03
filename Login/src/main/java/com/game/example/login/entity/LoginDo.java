@@ -9,7 +9,7 @@ import org.qiunet.data.redis.entity.RedisEntity;
  * 登录服登录信息
  */
 @Alias("LoginDo")
-@Table(name = "login", splitTable = true, dbSource = "login")
+@Table(name = "login", keyName = "player_id", splitTable = true, dbSource = "login")
 public class LoginDo extends RedisEntity<Long> {
 	@Column(comment = "玩家游戏和平台ID", isKey = true)
 	private long player_id;	// 客户端带过来
@@ -71,10 +71,5 @@ public class LoginDo extends RedisEntity<Long> {
 	@Override
 	public Long key() {
 		return player_id;
-	}
-
-	@Override
-	public String keyFieldName() {
-		return "player_id";
 	}
 }
