@@ -7,8 +7,8 @@
 游戏服从Redis中获得全局id作为roomId走进房流程
 
 调用PlayerActor#crossToServer通过serverId连接指定玩法服
-在Cross端的MessageActor为CrossPlayerActor
-在Server端的channel绑定的MessageActor为玩家本身的PlayerActor
+在玩法服Cross的channel(此channel是Server端)绑定的MessageActor为CrossPlayerActor
+在游戏服Server端的channel(此channel是Client端)绑定的MessageActor为玩家本身的PlayerActor
 
 游戏服playerActor调用fireCrossEvent触发EnterRoomCrossEvent事件
 玩法服处理EnterRoomCrossEvent，获取对应Room并且Player对象进入房间
@@ -17,8 +17,8 @@
 
 ```
 游戏服：
-Server端的PlayerActor退出时（不可重连），会触发PlayerActor对Cross端的连接断开
-如果Server端的PlayerActor与Cross端的连接断开，会触发在PlayerCrossConnector创建时注册的关闭监听，移除跨服状态
+Server端的PlayerActor销毁时（UserOnlineManager#destroyPlayer），会触发PlayerActor对Cross端的连接断开，
+会触发在PlayerCrossConnector创建时注册的关闭监听，移除Server端跨服状态。而Cross端也监听了连接断开，会处理退出跨服逻辑（如退出房间）。
 
 玩法服：
 channelActive:
@@ -31,7 +31,7 @@ CrossPlayerActor在创建时给DSession注册关闭监听[触发CrossActorLogout
 SceneService在鉴权后创建玩法服Player对象，CrossPlayerActor绑定Player
 
 游戏服玩家与玩法服重连处理：
-游戏服玩家连接与玩法服连接断开即会退出跨服状态，没有作重连。只有客户端与游戏服之间重连，会通知玩法服玩家重连了。
+游戏服玩家连接与玩法服连接断开即会退出跨服状态，没有重连操作。只有客户端与游戏服之间重连，会通知玩法服玩家重连了。
 在玩家断线期间，游戏服与玩法服仍然会保持连接，直到玩家重连或玩家销毁。
 
 ```
