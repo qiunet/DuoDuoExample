@@ -32,8 +32,6 @@ heap_ops="-Xmx512m -Xms256m -Xmn300m -Xss256k -XX:MaxDirectMemorySize=256m"
 
 JAVA_OPTS="-server\
   ${heap_ops}\
- -XX:+UseParallelGC\
- -XX:+UseParallelOldGC\
  -Dlog.dir=${GAME_LOGS}\
  -DhotSwap.dir=${GAME_SWAP}\
  -Dio.netty.recycler.ratio=0\
@@ -49,7 +47,7 @@ CLASSPATH="${CLASSPATH}:${GAME_HOME}/common-lib/*"
 CLASSPATH="${CLASSPATH}:${GAME_HOME}/lib/*"
 CLASSPATH="${CLASSPATH}:${GAME_HOME}/conf"
 
-BOOTSTRAP_CLASS="com.xy.game.server.cross.CrossServerBootStrap"
+BOOTSTRAP_CLASS="com.game.example.cross.CrossServerBootStrap"
 
 
 start(){

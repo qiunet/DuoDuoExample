@@ -1,5 +1,6 @@
 package com.game.example.basic.logic.player;
 
+import com.game.example.basic.logic.game.room.event.cross.PlayerReconnectEvent;
 import com.game.example.basic.logic.player.entity.PlayerBo;
 import com.game.example.basic.logic.player.entity.PlayerDo;
 import com.game.example.basic.logic.player.proto.*;
@@ -98,6 +99,7 @@ public enum PlayerService {
                 data.expire(ticket);
                 return;
             }
+            this.reconnect(playerActor);
             reconnect = true;
         }else {
             // 如果本机有waiter的. 可能里面保留了cross的连接. 需要销毁掉.
@@ -142,6 +144,16 @@ public enum PlayerService {
 
     }
 
+    /**
+     * 重连处理
+     */
+    private void reconnect(PlayerActor actor) {
+        if (actor.isCrossStatus()) {
+            // 通知连接的服务器处理
+            actor.fireCrossEvent(PlayerReconnectEvent.valueOf());
+        }
+    }
+
     ////////////////////////////////////////////////////以下是登出////////////////////////////////////////////////////////////////
     @EventListener
     public void playerLogout(PlayerActorLogoutEvent data) {
@@ -166,7 +178,7 @@ public enum PlayerService {
     }
 
     /**
-     * 处理logic跨服退出
+     * CrossPlayer连接断开，处理logic跨服退出
      */
     @EventListener
     private void crossLogout(CrossPlayerLogoutEvent event) {
@@ -179,7 +191,7 @@ public enum PlayerService {
 
     /**
      * 处理跨服销毁
-     * 跨服已经销毁对象. 通知player这.
+     * CrossPlayer已经销毁. 通知player这.
      */
     @EventListener
     private void crossDestroy(CrossPlayerDestroyEvent event) {
@@ -189,7 +201,5 @@ public enum PlayerService {
             event.getPlayer().quitCross(serverType, CloseCause.DESTROY);
         }, 1, TimeUnit.SECONDS);
     }
-
-
 
 }

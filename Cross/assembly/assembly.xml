@@ -20,7 +20,7 @@
 <!--			<outputDirectory>common-lib</outputDirectory>-->
 <!--			&lt;!&ndash;指定只打包多多的jar, 如果注释,则将所有lib打包&ndash;&gt;-->
 <!--			<excludes>-->
-<!--				<exclude>com.xy.game.server:*</exclude>-->
+<!--				<exclude>com.game.example:*</exclude>-->
 <!--				<exclude>io.github.qiunet:*</exclude>-->
 <!--			</excludes>-->
 <!--		</dependencySet>-->

@@ -31,8 +31,6 @@ heap_ops="-Xmx512m -Xms256m -Xss256k -XX:MaxDirectMemorySize=128m"
 
 JAVA_OPTS="-server\
   ${heap_ops}\
- -XX:+UseParallelGC\
- -XX:+UseParallelOldGC\
  -Dlog.dir=${GAME_LOGS}\
  -DhotSwap.dir=${GAME_SWAP}\
  -DsysLogs.dir=${GAME_SYS_LOGS}\
@@ -47,7 +45,7 @@ CLASSPATH="${CLASSPATH}:${GAME_HOME}/common-lib/*"
 CLASSPATH="${CLASSPATH}:${GAME_HOME}/lib/*"
 CLASSPATH="${CLASSPATH}:${GAME_HOME}/conf"
 
-BOOTSTRAP_CLASS="com.xy.game.server.login.LoginServerBootStrap"
+BOOTSTRAP_CLASS="com.game.example.login.LoginServerBootstrap"
 
 
 start(){

@@ -16,7 +16,6 @@ import org.qiunet.cross.actor.CrossPlayerActor;
 import org.qiunet.flash.handler.common.player.AbstractUserActor;
 import org.qiunet.flash.handler.common.player.event.CrossActorLogoutEvent;
 import org.qiunet.flash.handler.netty.server.constants.CloseCause;
-import org.qiunet.utils.listener.event.EventHandlerWeightType;
 import org.qiunet.utils.listener.event.EventListener;
 import org.slf4j.Logger;
 
@@ -70,8 +69,8 @@ public enum GameCrossService {
         room.enter(player.getVal(Player.PLAYER_IN_ACTOR_KEY));
     }
 
-    // 跨服玩家登出
-    @EventListener(EventHandlerWeightType.LESS)
+    // 跨服玩家登出(游戏服玩家与玩法服连接断开)
+    @EventListener() // 要在销毁CrossPlayerActor之前执行
     public void crossPlayerLogout(CrossActorLogoutEvent data) {
         CrossPlayerActor crossPlayerActor = data.getPlayer();
         Player player = crossPlayerActor.getVal(Player.PLAYER_IN_ACTOR_KEY);
@@ -95,7 +94,7 @@ public enum GameCrossService {
         room.addMessage(r -> r.getHandler().playerReconnect(r, player));
     }
 
-    // 跨服中. 玩家掉线事件
+    // 跨服中. 玩家掉线事件(客户端与游戏服连接断开)
     @EventListener
     private void playerBrokenEvent(PlayerBrokenEvent event) {
         CrossPlayerActor actor = event.getPlayer();
