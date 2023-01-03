@@ -31,5 +31,7 @@ CrossPlayerActor在创建时给DSession注册关闭监听[触发CrossActorLogout
 SceneService在鉴权后创建玩法服Player对象，CrossPlayerActor绑定Player
 
 游戏服玩家与玩法服重连处理：
+游戏服玩家连接与玩法服连接断开即会退出跨服状态，没有作重连。只有客户端与游戏服之间重连，会通知玩法服玩家重连了。
+在玩家断线期间，游戏服与玩法服仍然会保持连接，直到玩家重连或玩家销毁。
 
 ```
