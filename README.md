@@ -16,11 +16,14 @@ DuoDuo 示例项目
   ![assembly.xml配置](.img/assembly.png)
 * 编译打包：mvn package -DskipTests
 * 复制打包好的文件到指定目录并解压：
-  Server/target/Server-1.0.0.zip
-  Login/target/Login-1.0.0.zip
-  Cross/target/Cross-1.0.0.zip
+  > Server/target/Server-1.0.0.zip
+  
+  > Login/target/Login-1.0.0.zip
+  
+  > Cross/target/Cross-1.0.0.zip
+  
   ![解压后目录结构](.img/project.png)
-  根据需要修改server.conf的服务配置信息
+  > 根据需要修改server.conf的服务配置信息
   
 * 运行：
   执行上一步解压的三个目录下bin文件夹中的operator.sh文件，参数start
