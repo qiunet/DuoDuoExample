@@ -23,7 +23,7 @@ DuoDuo 示例项目
   > Cross/target/Cross-1.0.0.zip
   
   ![解压后目录结构](.img/project.png)
-  > 根据需要修改server.conf的服务配置信息
+  > 根据需要修改server.conf的服务器配置
   
 * 运行：
   > 执行上一步解压的三个目录下bin文件夹中的operator.sh文件，参数start
@@ -45,7 +45,7 @@ DuoDuo 示例项目
   > 在Windows环境下，监听了配置文件变化，当文件变化后自动加载更新配置。在Linux环境下，替换配置文件后，需要手动触发配置更新。
 * 热更class
   执行operator.sh文件，参数hotswap
-  > 在classes目录下放入编译好的class文件，执行指令，即可热更相应的class
+  > 在服务器运行状态下，在classes目录下放入编译好的class文件，执行指令，即可热更相应的class
 
 ## DuoDuo示例项目细节
 * [LoginServer细节](Login/README.md)
