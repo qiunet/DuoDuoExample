@@ -26,9 +26,11 @@ DuoDuo 示例项目
   > 根据需要修改server.conf的服务配置信息
   
 * 运行：
-  执行上一步解压的三个目录下bin文件夹中的operator.sh文件，参数start
-  如：LoginServer/bin/operator.sh start
-  执行日志生成在项目目录下的sysLogs文件夹中
+  > 执行上一步解压的三个目录下bin文件夹中的operator.sh文件，参数start
+  
+  > 如：LoginServer/bin/operator.sh start
+  
+  > 执行日志生成在项目目录下的sysLogs文件夹中
   ![启动日志](.img/start.png)
   (注：如果是从windows打包的，需要设置operator.sh为可执行文件，同时用vim修改换行符set ff=unix)
   
