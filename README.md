@@ -1,5 +1,6 @@
 # DuoDuoExample
 DuoDuo 示例项目
+> [DuoDuo框架](https://github.com/qiunet/DuoDuo)
 
 ## 开发环境
 * jdk 17
