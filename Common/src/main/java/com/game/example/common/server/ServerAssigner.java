@@ -10,7 +10,7 @@ import org.qiunet.utils.async.LazyLoader;
 import org.qiunet.utils.date.DateUtil;
 import org.qiunet.utils.json.JsonUtil;
 import org.qiunet.utils.listener.event.EventListener;
-import org.qiunet.utils.listener.event.data.ServerShutdownEventData;
+import org.qiunet.utils.listener.event.data.ServerShutdownEvent;
 import redis.clients.jedis.params.SetParams;
 
 import java.util.List;
@@ -147,7 +147,7 @@ public enum ServerAssigner {
     }
 
     @EventListener
-    private void onShutdown(ServerShutdownEventData eventData) {
+    private void onShutdown(ServerShutdownEvent eventData) {
         RedisDataUtil.jedis().hdel(serverInfoDataRedisKey(CURRENT_SERVER_TYPE.get()), String.valueOf(CURRENT_SERVER_ID.get()));
     }
 }

@@ -7,7 +7,7 @@ import com.game.example.basic.logic.game.room.observer.IRoomDestroy;
 import com.google.common.collect.Maps;
 import org.qiunet.utils.listener.event.EventHandlerWeightType;
 import org.qiunet.utils.listener.event.EventListener;
-import org.qiunet.utils.listener.event.data.ServerShutdownEventData;
+import org.qiunet.utils.listener.event.data.ServerShutdownEvent;
 
 import java.util.Map;
 
@@ -48,7 +48,7 @@ public enum RoomManager {
     }
 
     @EventListener(EventHandlerWeightType.HIGHEST)
-    private void onShutdown(ServerShutdownEventData eventData) {
+    private void onShutdown(ServerShutdownEvent eventData) {
         roomMap.values().forEach(Room::destroy);
     }
 }

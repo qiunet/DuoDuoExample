@@ -7,7 +7,7 @@ import com.game.example.basic.logic.scene.object.MovableObject;
 import com.game.example.basic.logic.scene.object.Player;
 import com.game.example.common.logger.GameLogger;
 import org.qiunet.cross.actor.CrossPlayerActor;
-import org.qiunet.cross.actor.event.CrossPlayerAuthSuccessEventData;
+import org.qiunet.cross.actor.event.CrossPlayerAuthSuccessEvent;
 import org.qiunet.utils.listener.event.EventHandlerWeightType;
 import org.qiunet.utils.listener.event.EventListener;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ public enum SceneService {
     private static final Logger logger = GameLogger.COMM_LOGGER.getLogger();
 
     @EventListener(EventHandlerWeightType.HIGH)
-    private void authBindPlayer(CrossPlayerAuthSuccessEventData eventData) {
+    private void authBindPlayer(CrossPlayerAuthSuccessEvent eventData) {
         CrossPlayerActor actor = eventData.getPlayer();
         if (! actor.isNull(Player.PLAYER_IN_ACTOR_KEY)) {
             // 不为null 说明是重连过来的
