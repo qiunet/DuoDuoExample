@@ -12,6 +12,8 @@ GAME_LOGS=${GAME_HOME}/logs
 GAME_SYS_LOGS=${GAME_HOME}/sysLogs
 # 热更新目录
 GAME_SWAP=${GAME_HOME}/classes
+# 增加进程可open file数
+ulimit -u 10240
 
 red(){
     echo -e "\033[31m\033[01m$1\033[0m"
