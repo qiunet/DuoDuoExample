@@ -41,7 +41,6 @@ JAVA_OPTS="-server\
  -Dfile.encoding=UTF-8\
  -XX:HeapDumpPath=dumps/"
 
-CLASSPATH="."
 CLASSPATH="${CLASSPATH}:${JAVA_HOME}/lib/tools.jar"
 CLASSPATH="${CLASSPATH}:${GAME_HOME}/common-lib/*"
 CLASSPATH="${CLASSPATH}:${GAME_HOME}/lib/*"
