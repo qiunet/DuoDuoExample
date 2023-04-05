@@ -7,12 +7,12 @@ import com.game.example.basic.logic.scene.proto.ScenePositionReq;
 import com.game.example.basic.logic.scene.proto.ScenePositionRsp;
 import com.google.common.base.Preconditions;
 import org.qiunet.cross.actor.CrossPlayerActor;
-import org.qiunet.cross.common.handler.BaseTcpPbTransmitHandler;
+import org.qiunet.cross.common.handler.BasePbTransmitHandler;
 import org.qiunet.flash.handler.common.player.AbstractUserActor;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.flash.handler.context.request.persistconn.IPersistConnRequest;
 
-public class ScenePositionHandler extends BaseTcpPbTransmitHandler<ScenePositionReq> {
+public class ScenePositionHandler extends BasePbTransmitHandler<ScenePositionReq> {
 
 	@Override
 	public void handler(PlayerActor playerActor, IPersistConnRequest<ScenePositionReq> context) throws Exception {

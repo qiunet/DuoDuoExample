@@ -4,7 +4,7 @@ import com.game.example.basic.logic.scene.domain.Coordinate;
 import com.game.example.basic.logic.scene.object.Player;
 import com.game.example.basic.logic.scene.proto.TransportReq;
 import org.qiunet.cross.actor.CrossPlayerActor;
-import org.qiunet.cross.common.handler.BaseTcpPbTransmitHandler;
+import org.qiunet.cross.common.handler.BasePbTransmitHandler;
 import org.qiunet.flash.handler.common.player.AbstractUserActor;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.flash.handler.context.request.persistconn.IPersistConnRequest;
@@ -12,7 +12,7 @@ import org.qiunet.flash.handler.context.request.persistconn.IPersistConnRequest;
 /***
  * 传送
  */
-public class TransferHandler extends BaseTcpPbTransmitHandler<TransportReq> {
+public class TransferHandler extends BasePbTransmitHandler<TransportReq> {
 
 	@Override
 	public void handler(PlayerActor playerActor, IPersistConnRequest<TransportReq> context) throws Exception {

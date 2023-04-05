@@ -27,10 +27,7 @@ public class CrossServerBootStrap {
 					.addParam(ScannerParamKey.SERVER_NODE_REDIS_INSTANCE_SUPPLIER, RedisGlobalUtil::getInstance)
 					.scanner("com.game.example");
 
-			BootstrapServer.createBootstrap(hook)
-					.listener(ServerBootStrapConfig.newBuild("玩法服", ServerConfig.getServerPort()).setStartupContext(IStartupContext.DEFAULT_CROSS_START_CONTEXT).build())
-					.listener(ServerBootStrapConfig.newBuild("服务器通讯节点", ServerConfig.getNodePort()).setStartupContext(IStartupContext.DEFAULT_SERVER_NODE_START_CONTEXT).build())
-					.await();
+			BootstrapServer.createBootstrap(hook).await();
 			return;
 		}
 		IKeyValueData<Object, Object> keyValueData = ConfigFileUtil.loadConfig(ServerConfig.CONFIG_FILE_NAME);

@@ -2,45 +2,42 @@ package com.game.example.basic.logic.game.room.player;
 
 import com.game.example.basic.logic.scene.object.MovableObject;
 import com.game.example.basic.logic.scene.object.Player;
-import org.qiunet.flash.handler.context.sender.IChannelMessageSender;
+import org.qiunet.flash.handler.context.session.IPlayerSender;
+import org.qiunet.flash.handler.context.session.ISession;
 
 /**
  * 房间的玩家对象
  * 保存玩家在房间中的一些状态，如加入房间时间、房间游戏状态等
+ *
+ * @param player 玩家跨服对象
  */
-public class RoomPlayer implements IChannelMessageSender {
-    // 玩家跨服对象
-    private final MovableObject player;
+public record RoomPlayer(MovableObject player) implements IPlayerSender {
 
-    public RoomPlayer(MovableObject player) {
-        this.player = player;
-    }
+	public long getId() {
+		return player.getId();
+	}
 
-    public MovableObject getPlayer(){
-        return player;
-    }
+	/**
+	 * 是否不是自己
+	 */
+	public boolean isNotSelf(long playerId) {
+		return !isSelf(playerId);
+	}
 
-    public long getId(){
-        return player.getId();
-    }
+	/**
+	 * 是否是自己
+	 */
+	public boolean isSelf(long playerId) {
+		return player.getId() == playerId;
+	}
 
-    /**
-     * 是否不是自己
-     */
-    public boolean isNotSelf(long playerId) {
-        return !isSelf(playerId);
-    }
+	@Override
+	public ISession getSession() {
+		return player.isPlayer() ? ((Player) player).getSession() : null;
+	}
 
-    /**
-     * 是否是自己
-     */
-    public boolean isSelf(long playerId) {
-        return player.getId() == playerId;
-    }
-
-
-    @Override
-    public IChannelMessageSender getSender() {
-        return player.isPlayer() ? ((Player)player).getUserActor() : null;
-    }
+	@Override
+	public ISession getKcpSession() {
+		return player.isPlayer() ? ((Player) player).getKcpSession() : null;
+	}
 }

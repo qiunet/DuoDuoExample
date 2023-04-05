@@ -9,6 +9,7 @@ import com.game.example.basic.logic.game.room.event.cross.PlayerRoomInfoReqEvent
 import com.game.example.basic.logic.game.room.proto.JoinRoomFailRsp;
 import com.game.example.basic.logic.game.room.proto.RoomQuitReq;
 import com.game.example.basic.logic.id_builder.enums.GlobalIdBuilderType;
+import com.game.example.common.logger.GameLogger;
 import com.game.example.common.server.ServerAssigner;
 import com.game.example.common.utils.redis.RedisDataUtil;
 import org.qiunet.cross.node.ServerInfo;
@@ -54,7 +55,6 @@ public enum GameService {
     }
 
     /**
-     * @see GameCrossService#playerRoomInfoReq(PlayerRoomInfoReqEvent)
      * @see #playerRoomInfoRsp(PlayerRoomInfoRspEvent)
      */
     private void handlerCross(PlayerActor playerActor, boolean privacy) {
@@ -112,8 +112,14 @@ public enum GameService {
         long finalRoomId = roomId;
         playerActor.addMessage((p) -> {
             EnterRoomCrossEvent event = EnterRoomCrossEvent.valueOf(privacy, finalRoomId);
-            playerActor.crossToServer(serverId);
-            playerActor.fireCrossEvent(event);
+            playerActor.crossToServer(serverId, result -> {
+				if (result) {
+					playerActor.fireCrossEvent(event);
+				}else {
+					GameLogger.GAME_ROOM.error("cross to server {} failed!", serverId);
+				}
+			});
+
         });
     }
 

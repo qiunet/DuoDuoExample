@@ -5,7 +5,6 @@ import com.game.example.basic.logic.scene.proto.ScenePositionRsp;
 import com.game.example.server.stress.testing.TestingConstant;
 import com.game.example.server.stress.testing.action.RobotRequestAction;
 import com.game.example.server.stress.testing.robot.RoomInfo;
-import org.qiunet.flash.handler.context.request.data.IChannelData;
 import org.qiunet.function.ai.enums.ActionStatus;
 import org.qiunet.function.condition.IConditions;
 import org.qiunet.game.test.response.TestResponse;
@@ -35,7 +34,7 @@ public class RoomMoveAction extends RobotRequestAction {
         ScenePositionReq req = new ScenePositionReq();
         req.setX(1);
         req.setY(1);
-        sendKcpMessage((IChannelData)req, true);
+        sendMessage(req, true);
     }
 
     @TestResponse

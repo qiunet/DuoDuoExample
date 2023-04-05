@@ -1,48 +1,28 @@
 package com.game.example.basic.logic.scene.object;
 
 import com.game.example.basic.logic.scene.enums.ObjectType;
-import io.netty.channel.ChannelFuture;
 import org.qiunet.cross.actor.CrossPlayerActor;
 import org.qiunet.flash.handler.common.IMessage;
 import org.qiunet.flash.handler.common.player.AbstractUserActor;
 import org.qiunet.flash.handler.common.player.observer.IPlayerDestroy;
 import org.qiunet.flash.handler.context.request.data.IChannelData;
-import org.qiunet.flash.handler.context.response.push.IChannelMessage;
-import org.qiunet.flash.handler.context.sender.IChannelMessageSender;
+import org.qiunet.flash.handler.context.session.IPlayerSender;
+import org.qiunet.flash.handler.context.session.ISession;
 import org.qiunet.utils.args.ArgumentKey;
 
 import java.util.function.Predicate;
 
-public class Player extends MovableObject<Player> implements IChannelMessageSender {
+public class Player extends MovableObject<Player> implements IPlayerSender {
 
     public static final ArgumentKey<Player> PLAYER_IN_ACTOR_KEY = new ArgumentKey<>();
 
-    private AbstractUserActor userActor;
+    private final AbstractUserActor userActor;
 
     public Player(AbstractUserActor userActor, ObjectType objectType, long objectId) {
         super(objectType, objectId);
         this.userActor = userActor;
     }
 
-    @Override
-    public ChannelFuture sendMessage(IChannelData message) {
-        return userActor.sendMessage(message);
-    }
-
-    @Override
-    public ChannelFuture sendMessage(IChannelData message, boolean flush) {
-        return userActor.sendMessage(message, flush);
-    }
-
-    @Override
-    public ChannelFuture sendKcpMessage(IChannelMessage<?> message, boolean flush) {
-        return userActor.sendKcpMessage(message, flush);
-    }
-
-    @Override
-    public ChannelFuture sendKcpMessage(IChannelData message, boolean flush) {
-        return userActor.sendKcpMessage(message, flush);
-    }
 
     @Override
     public boolean addMessage(IMessage<Player> msg) {
@@ -73,9 +53,13 @@ public class Player extends MovableObject<Player> implements IChannelMessageSend
         return userActor;
     }
 
-    @Override
-    public IChannelMessageSender getSender() {
-        return userActor;
-    }
+	@Override
+	public ISession getKcpSession() {
+		return userActor.getKcpSession();
+	}
 
+	@Override
+	public ISession getSession() {
+		return userActor.getSession();
+	}
 }

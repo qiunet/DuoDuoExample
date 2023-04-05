@@ -12,11 +12,9 @@ import com.game.example.common.logger.GameLogger;
 import com.google.common.collect.Sets;
 import org.qiunet.data.db.loader.DataLoader;
 import org.qiunet.data.support.DbDataSupport;
-import org.qiunet.data.util.ServerType;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.flash.handler.common.player.UserOnlineManager;
 import org.qiunet.flash.handler.common.player.event.CrossPlayerDestroyEvent;
-import org.qiunet.flash.handler.common.player.event.CrossPlayerLogoutEvent;
 import org.qiunet.flash.handler.common.player.event.PlayerActorLogoutEvent;
 import org.qiunet.flash.handler.common.player.observer.IPlayerDestroy;
 import org.qiunet.flash.handler.context.status.StatusResultException;
@@ -176,20 +174,7 @@ public enum PlayerService {
         }
         PlayerPlatformData.del(playerActor.getPlayerId());
     }
-
-    /**
-     * CrossPlayer连接断开，处理logic跨服退出
-     */
-    @EventListener
-    private void crossLogout(CrossPlayerLogoutEvent event) {
-        ServerType serverType = ServerType.getServerType(event.getServerId());
-        if (serverType != ServerType.LOGIC) {
-            return;
-        }
-        event.getPlayer().switchCross(null);
-    }
-
-    /**
+	/**
      * 处理跨服销毁
      * CrossPlayer已经销毁. 通知player这.
      */
@@ -197,8 +182,7 @@ public enum PlayerService {
     private void crossDestroy(CrossPlayerDestroyEvent event) {
         // 延缓一秒关闭. 给玩法服一些时间处理事情
         event.getPlayer().scheduleMessage(p -> {
-            ServerType serverType = ServerType.getServerType(event.getServerId());
-            event.getPlayer().quitCross(serverType, CloseCause.DESTROY);
+            event.getPlayer().quitCross(event.getServerId(), CloseCause.DESTROY);
         }, 1, TimeUnit.SECONDS);
     }
 
