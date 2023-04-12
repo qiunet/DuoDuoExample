@@ -2,7 +2,7 @@ package com.game.example.basic.logic.player.cfg;
 
 import com.game.example.basic.logic.player.cfg.data.RoleAvatarCfg;
 import org.qiunet.cfg.event.CfgLoadCompleteEvent;
-import org.qiunet.cfg.wrapper.ISimpleMapCfgWrapper;
+import org.qiunet.cfg.manager.base.ISimpleMapCfgWrapper;
 import org.qiunet.utils.listener.event.EventListener;
 import org.qiunet.utils.scanner.anno.AutoWired;
 

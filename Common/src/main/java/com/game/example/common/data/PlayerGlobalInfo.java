@@ -2,7 +2,6 @@ package com.game.example.common.data;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.game.example.common.utils.redis.RedisGlobalUtil;
-import org.qiunet.data.util.ServerType;
 import org.qiunet.utils.date.DateUtil;
 import org.qiunet.utils.exceptions.CustomException;
 import org.qiunet.utils.json.JsonUtil;
@@ -36,21 +35,10 @@ public class PlayerGlobalInfo {
 	@JSONField(serialize = false, deserialize = false)
 	private long playerId;
 	/**
-	 * 玩家所在服务器ID
-	 */
-	@JSONField(name = "si")
-	private int serverId;
-	/**
 	 * 最后登录时间 秒
 	 */
 	@JSONField(name = "ld")
 	private long lastLoginDt;
-	/**
-	 * 玩家当前所在的服务器
-	 * 比如去别的服务器玩了
-	 */
-	@JSONField(name = "cs")
-	private int currServerId;
 	/**
 	 * 是否在线.
 	 * 不在线. 说明离线数据在哪个服务器.
@@ -113,39 +101,8 @@ public class PlayerGlobalInfo {
 		return this;
 	}
 
-	public PlayerGlobalInfo setCurrServerId(int currServerId) {
-		this.currServerId = currServerId;
-		return this;
-	}
-
-	public PlayerGlobalInfo setServerId(int serverId) {
-		this.serverId = serverId;
-		return this;
-	}
-
 	public boolean isOffline() {
 		return offline;
-	}
-
-	/**
-	 * 当前在哪个服务器
-	 * 可以跟随玩家
-	 */
-	public int getCurrServerId() {
-		return currServerId;
-	}
-
-	/**
-	 * 当前在的服务器类型
-	 */
-	public ServerType getCurrentServerType(){
-		return ServerType.getServerType(currServerId);
-	}
-	/**
-	 * 数据在哪个服务器.
-	 */
-	public int getServerId() {
-		return serverId;
 	}
 
 	public long getPlayerId() {

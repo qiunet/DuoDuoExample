@@ -1,10 +1,10 @@
 package com.game.example.server.handler.player;
 
+import com.game.example.basic.logic.player.PlayerService;
 import com.game.example.basic.logic.player.proto.LoginReq;
 import com.game.example.common.constants.GameStatus;
 import com.game.example.common.data.PlayerPlatformData;
 import com.game.example.server.common.handler.GameHandler;
-import com.game.example.basic.logic.player.PlayerService;
 import org.qiunet.data.util.ServerConfig;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.flash.handler.common.player.proto.ReconnectInvalidPush;
@@ -41,7 +41,7 @@ public class LoginHandler extends GameHandler<LoginReq> {
 			throw StatusResultException.valueOf(GameStatus.LOGIN_SERVER_ERROR);
 		}
 
-		PlayerService.instance.doLogin(playerActor, data, ticket);
+		PlayerService.instance.doLogin(playerActor, data);
 	}
 
 	@Override

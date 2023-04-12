@@ -1,6 +1,5 @@
 package com.game.example.basic.logic.game.room.proto;
 
-import com.baidu.bjf.remoting.protobuf.FieldType;
 import com.baidu.bjf.remoting.protobuf.annotation.Protobuf;
 import com.game.example.basic.protocol.ProtocolID;
 import org.qiunet.flash.handler.context.request.data.ChannelData;
@@ -11,7 +10,7 @@ import org.qiunet.flash.handler.context.request.data.IChannelData;
  **/
 @ChannelData(ID = ProtocolID.Game.Room.ROOM_PLAYER_QUIT_PUSH, desc = "玩家离开房间推送")
 public class RoomPlayerQuitPush extends IChannelData {
-	@Protobuf(description = "退出玩家的ID", fieldType = FieldType.SFIXED64)
+	@Protobuf(description = "退出玩家的ID")
 	private long playerId;
 
 	public static RoomPlayerQuitPush valueOf(long playerId) {

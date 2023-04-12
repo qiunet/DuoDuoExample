@@ -8,8 +8,8 @@ public class NeedRegisterCondition extends RobotRequestCondition {
 
     @Override
     protected boolean verify0(Robot robot, RobotData data) {
-        return data.getLoginRsp() != null
-                && data.getLoginRsp().isNeedRegister()
+		// 本身有这个, 就说明是添加进来的注册节点.
+        return data.getLoginRsp() == null
                 && data.getRegisterRsp() == null;
     }
 

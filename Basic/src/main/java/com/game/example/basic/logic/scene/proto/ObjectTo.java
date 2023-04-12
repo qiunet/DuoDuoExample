@@ -1,6 +1,5 @@
 package com.game.example.basic.logic.scene.proto;
 
-import com.baidu.bjf.remoting.protobuf.FieldType;
 import com.baidu.bjf.remoting.protobuf.annotation.Protobuf;
 import com.baidu.bjf.remoting.protobuf.annotation.ProtobufClass;
 import com.game.example.basic.logic.scene.object.VisibleObject;
@@ -13,7 +12,7 @@ import org.qiunet.flash.handler.util.proto.CommonModuleProto;
 @CommonModuleProto
 @ProtobufClass(description = "简单的玩家传输对象, 一般是查看其它玩家数据")
 public class ObjectTo {
-	@Protobuf(description = "对象id", fieldType = FieldType.SFIXED64)
+	@Protobuf(description = "对象id")
 	private long objectId;
 
 	@Protobuf(description = "名称")

@@ -1,6 +1,5 @@
 package com.game.example.basic.logic.player.proto;
 
-import com.baidu.bjf.remoting.protobuf.FieldType;
 import com.baidu.bjf.remoting.protobuf.annotation.Protobuf;
 import com.baidu.bjf.remoting.protobuf.annotation.ProtobufClass;
 import com.game.example.basic.logic.player.entity.PlayerBo;
@@ -14,10 +13,10 @@ public class PlayerTo {
 	@Protobuf(description = "玩家的objectTo对象")
 	private ObjectTo objectTo;
 
-	@Protobuf(description = "游戏普通货币", fieldType = FieldType.SFIXED64)
+	@Protobuf(description = "游戏普通货币")
 	private long m2;
 
-	@Protobuf(description = "游戏人民币代币", fieldType = FieldType.SFIXED64)
+	@Protobuf(description = "游戏人民币代币")
 	private long m1;
 
 	public PlayerTo() {}

@@ -4,6 +4,7 @@ import com.game.example.basic.logic.player.enums.GenderType;
 import org.qiunet.cfg.annotation.Cfg;
 import org.qiunet.cfg.base.ICfgCheck;
 import org.qiunet.cfg.base.ISimpleMapCfg;
+import org.qiunet.cfg.manager.base.ILoadSandbox;
 import org.qiunet.utils.collection.generics.StringList;
 
 @Cfg("config/role_avatar.json")
@@ -46,7 +47,7 @@ public class RoleAvatarCfg implements ISimpleMapCfg<Integer>, ICfgCheck {
 	 * 检查配置
 	 */
 	@Override
-	public void check() {
+	public void check(ILoadSandbox sandbox) {
 		// 忽略检查
 	}
 }

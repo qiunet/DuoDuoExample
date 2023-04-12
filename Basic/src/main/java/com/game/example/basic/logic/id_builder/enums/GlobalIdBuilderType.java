@@ -3,6 +3,7 @@ package com.game.example.basic.logic.id_builder.enums;
 import com.game.example.basic.logic.id_builder.global.entity.GlobalIdBuilderBo;
 import com.game.example.basic.logic.id_builder.global.entity.GlobalIdBuilderDo;
 import com.game.example.common.utils.redis.RedisDataUtil;
+import org.qiunet.data.core.support.redis.RedisLock;
 import org.qiunet.data.support.DbDataSupport;
 import org.qiunet.data.util.ServerConfig;
 import org.qiunet.utils.async.LazyLoader;
@@ -28,17 +29,21 @@ public enum GlobalIdBuilderType {
 			String redisKey = this.redisKey.get();
 			// 如果不能创建. 会抛出异常异常
 			if (! RedisDataUtil.jedis().exists(redisKey)) {
-				return RedisDataUtil.getInstance().redisLockRun(redisKey, () -> {
+				try (RedisLock lock = RedisDataUtil.getInstance().redisLock(redisKey)) {
 					if (RedisDataUtil.jedis().exists(redisKey)) {
 						return true;
 					}
+
+					if (! lock.tryLock()) {
+						return false;
+					}
+
 					GlobalIdBuilderBo bo = dataSupport.getBo(getType());
 					if (bo == null) {
 						bo = dataSupport.insert(new GlobalIdBuilderDo(getType(), 0));
 					}
-					 RedisDataUtil.jedis().set(redisKey, String.valueOf(bo.getDo().getId_val()));
-					return true;
-				});
+					RedisDataUtil.jedis().set(redisKey, String.valueOf(bo.getDo().getId_val()));
+				}
 			}
 			return true;
 		}

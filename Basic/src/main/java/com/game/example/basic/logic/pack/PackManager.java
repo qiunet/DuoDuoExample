@@ -2,7 +2,7 @@ package com.game.example.basic.logic.pack;
 
 import com.game.example.basic.logic.pack.cfg.BackpackTypeCfg;
 import com.game.example.basic.logic.pack.enums.PackType;
-import org.qiunet.cfg.wrapper.ISimpleMapCfgWrapper;
+import org.qiunet.cfg.manager.base.ISimpleMapCfgWrapper;
 import org.qiunet.utils.scanner.anno.AutoWired;
 
 public enum PackManager {

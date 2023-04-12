@@ -3,6 +3,7 @@ package com.game.example.server.stress.testing.action.login;
 import com.game.example.basic.logic.pack.proto.AllPackItemPush;
 import com.game.example.basic.logic.player.proto.LoginReq;
 import com.game.example.basic.logic.player.proto.LoginRsp;
+import com.game.example.basic.logic.player.proto.NeedRegisterPush;
 import com.game.example.basic.logic.player.proto.PlayerDataPush;
 import com.game.example.common.logger.GameLogger;
 import com.game.example.server.stress.testing.action.RobotRequestAction;
@@ -34,12 +35,14 @@ public class LoginAction extends RobotRequestAction {
         return (getRobotData().getLoginRsp() != null) ? ActionStatus.SUCCESS : ActionStatus.RUNNING;
     }
 
+	@TestResponse
+	public void needRegister(NeedRegisterPush push) {
+		parent().addChild(new RandomNameAction(new NeedRegisterCondition()),
+			new RegisterAction((IConditions<Robot>) ConditionManager.EMPTY_CONDITION));
+	}
+
     @TestResponse
     public final void loginResponse(LoginRsp loginRsp) {
-        if (loginRsp.isNeedRegister()) {
-            parent().addChild(new RandomNameAction(new NeedRegisterCondition()),
-                    new RegisterAction((IConditions<Robot>) ConditionManager.EMPTY_CONDITION));
-        }
         getRobotData().setLoginRsp(loginRsp);
     }
 

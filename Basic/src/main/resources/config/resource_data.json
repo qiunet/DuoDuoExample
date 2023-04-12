@@ -1,14 +1,17 @@
 [
     {
         "resId": 1,
-        "name": "铜钱"
+        "name": "铜钱",
+		"reward": "{'id': 1, 'value': 2}"
     },
     {
         "resId": 2,
-        "name": "银钱"
+        "name": "银钱",
+		"reward": "{'id': 1, 'value': 2}"
     },
     {
         "resId": 3,
-        "name": "金钱"
+        "name": "金钱",
+		"reward": "{'id': 2, 'value': 2}"
     }
 ]

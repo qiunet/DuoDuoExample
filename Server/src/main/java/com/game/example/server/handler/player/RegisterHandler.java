@@ -1,15 +1,15 @@
 package com.game.example.server.handler.player;
 
-import com.game.example.common.data.AvatarInfo;
+import com.game.example.basic.logic.player.PlayerService;
 import com.game.example.basic.logic.player.cfg.PlayerCfgManager;
 import com.game.example.basic.logic.player.cfg.data.RoleAvatarCfg;
 import com.game.example.basic.logic.player.entity.PlayerBo;
 import com.game.example.basic.logic.player.proto.RegisterReq;
 import com.game.example.basic.logic.player.proto.RegisterRsp;
 import com.game.example.common.constants.GameStatus;
+import com.game.example.common.data.AvatarInfo;
 import com.game.example.common.data.PlayerPlatformData;
 import com.game.example.server.common.handler.GameHandler;
-import com.game.example.basic.logic.player.PlayerService;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.flash.handler.context.request.persistconn.IPersistConnRequest;
 import org.qiunet.flash.handler.context.status.StatusResultException;
@@ -57,10 +57,4 @@ public class RegisterHandler extends GameHandler<RegisterReq> {
             throw ex;
         }
     }
-
-    @Override
-    public boolean needAuth() {
-        return false;
-    }
-
 }

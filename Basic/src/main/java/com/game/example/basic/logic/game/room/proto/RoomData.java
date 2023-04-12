@@ -1,6 +1,5 @@
 package com.game.example.basic.logic.game.room.proto;
 
-import com.baidu.bjf.remoting.protobuf.FieldType;
 import com.baidu.bjf.remoting.protobuf.annotation.Protobuf;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
  * 房间的数据
  **/
 public class RoomData {
-	@Protobuf(description = "房间id", fieldType = FieldType.SFIXED64)
+	@Protobuf(description = "房间id")
 	private long roomId;
 	@Protobuf(description = "房间的所有玩家")
 	private List<RoomPlayerTo> playerDataList;

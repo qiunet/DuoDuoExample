@@ -1,8 +1,6 @@
 package com.game.example.basic.common;
 
-import com.game.example.basic.logic.resource.ResourceManager;
 import org.qiunet.function.attr.enums.IAttrEnum;
-import org.qiunet.function.base.IResourceCfg;
 import org.qiunet.function.base.basic.IBasicFunction;
 
 /***
@@ -13,10 +11,5 @@ public class BasicFunction implements IBasicFunction {
 	@Override
 	public <Type extends Enum<Type> & IAttrEnum<Type>> Type parse(String attrName) {
 		return null;
-	}
-
-	@Override
-	public IResourceCfg getResById(int cfgId) {
-		return ResourceManager.instance.getResource(cfgId);
 	}
 }

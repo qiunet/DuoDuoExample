@@ -17,6 +17,8 @@ public interface ProtocolID {
     interface Player {
         // 玩家数据推送
         int PLAYER_DATA_PUSH = 1000001;
+        // 需要注册
+		int NEED_REGISTER_PUSH = 1000002;
 
         // 登录协议
         int LOGIN_REQ = 1001;
