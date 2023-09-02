@@ -44,7 +44,7 @@ public enum PlayerService {
 		playerDo.setToken(data.getToken());
 		playerDo.setName(data.getName());
 		playerDo.setRegister_date(DateUtil.currentTimeMillis());
-		actor.insertDo(playerDo);
+		actor.insertDo(playerDo, true);
 
         actor.sendMessage(RegisterRsp.valueOf(true));
         this.loginSuccess(actor, data);
@@ -56,7 +56,6 @@ public enum PlayerService {
             throw StatusResultException.valueOf(GameStatus.LOGIN_REQUEST_REPEATED);
         }
 
-        this.repeatedLoginCheck(data.getPlayerId(), data.getTicket());
         actor.auth(data.getPlayerId());
 
         PlayerBo playerBo = dataSupport.getBo(data.getPlayerId());
@@ -74,33 +73,25 @@ public enum PlayerService {
     public void loginSuccess(PlayerActor playerActor, PlayerPlatformData data) {
         PlayerBo playerBo = playerActor.getData(PlayerBo.class);
         String preTicket = playerBo.getDo().getTicket();
+		PlayerActor preActor = playerActor;
 		String ticket = data.getTicket();
-        boolean reconnect = false;
 
-        if (Objects.equals(preTicket, ticket)) {   // 如果本次客户端带的ticket与服务端持有的ticket一致就走重连逻辑
-            // 玩家ticket进入, 重连处理.
-            playerActor = UserOnlineManager.instance.reconnect(data.getPlayerId(), playerActor);
-            if (playerActor == null) {
-                // 重连没有成功. 数据已经失效. 客户端应该重走登录流程
-                data.expire(ticket);
-                return;
-            }
-            this.reconnect(playerActor);
-            reconnect = true;
-        }else {
-            // 如果本机有waiter的. 可能里面保留了cross的连接. 需要销毁掉.
-            UserOnlineManager.instance.destroyWaiter(playerActor.getPlayerId());
-        }
-
-        playerActor.sendMessage(LoginRsp.valueOf(data.getPlayerId(), reconnect));
+		// 玩家ticket进入, 重连处理.
+		playerActor = UserOnlineManager.instance.reconnect(playerActor, () -> Objects.equals(preTicket, ticket));
+		if (playerActor == null) {
+			// 重连没有成功. 数据已经失效. 客户端应该重走登录流程
+			data.expire(ticket);
+			return;
+		}
+        playerActor.sendMessage(LoginRsp.valueOf(data.getPlayerId(), playerActor != preActor));
         playerActor.setOpenId(String.valueOf(data.getPlayerId()));
         playerActor.loginSuccess();
 
         playerBo = playerActor.getData(PlayerBo.class);
         playerBo.getDo().setToken(data.getToken());
-        playerBo.getDo().setTicket(ticket);
         playerBo.getDo().setName(data.getName());
-        playerBo.update();
+		playerBo.getDo().setTicket(ticket);
+		playerBo.update();
 
         PlayerDataPush playerDataPush = PlayerDataPush.valueOf(PlayerTo.valueOf(playerBo));
         playerActor.sendMessage(playerDataPush);
