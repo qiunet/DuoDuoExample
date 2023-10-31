@@ -19,6 +19,7 @@ public abstract class MObject<Owner extends MObject<Owner>> extends MessageHandl
     private final long objectId;
 
     public MObject(ObjectType objectType, long objectId) {
+		super(String.valueOf(objectId));
         this.objectType = objectType;
         this.objectId = objectId;
     }

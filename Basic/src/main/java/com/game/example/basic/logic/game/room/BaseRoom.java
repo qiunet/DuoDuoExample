@@ -21,6 +21,7 @@ public abstract class BaseRoom extends MessageHandler<Room> implements IArgsCont
     protected final long roomId;
 
     protected BaseRoom(IRoomHandler handler, long roomId) {
+		super(String.valueOf(roomId));
         this.handler = handler;
         this.roomId = roomId;
     }

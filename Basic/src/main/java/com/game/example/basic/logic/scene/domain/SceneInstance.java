@@ -47,12 +47,11 @@ public final class SceneInstance extends MessageHandler<SceneInstance> {
     private final int regionGridSize;
 
     public SceneInstance(String sceneId) {
-        this.sceneId = sceneId;
-        this.viewRegionGridSize = DEFAULT_VIEW_REGION_GRID_SIZE;
-        this.regionGridSize = DEFAULT_REGION_GRID_SIZE;
+		this(sceneId, DEFAULT_VIEW_REGION_GRID_SIZE, DEFAULT_REGION_GRID_SIZE);
     }
 
     public SceneInstance(String sceneId, int viewRegionGridSize, int regionGridSize) {
+		super(sceneId);
         this.sceneId = sceneId;
         this.viewRegionGridSize = viewRegionGridSize;
         this.regionGridSize = regionGridSize;

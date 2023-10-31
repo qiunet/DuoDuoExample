@@ -20,7 +20,7 @@
 
     <properties>
         <project.basic.module.resources.dir>${project.basedir}/../Basic/src/main/resources</project.basic.module.resources.dir>
-        <duoduo.version>7.2.1</duoduo.version>
+        <duoduo.version>7.2.2</duoduo.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <kotlin.version>1.6.20-RC</kotlin.version>
