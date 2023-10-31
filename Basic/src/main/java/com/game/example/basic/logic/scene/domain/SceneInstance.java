@@ -36,7 +36,7 @@ public final class SceneInstance extends MessageHandler<SceneInstance> {
     /**
      * 包含的区域
      */
-    private final Map<String, MapRegion> regions = Maps.newConcurrentMap();
+    private final Map<Long, MapRegion> regions = Maps.newConcurrentMap();
     /**
      * 视野格子数
      */
@@ -58,7 +58,7 @@ public final class SceneInstance extends MessageHandler<SceneInstance> {
     }
 
     // 可能为null
-    public MapRegion returnRegion(String regionId) {
+    public MapRegion returnRegion(long regionId) {
         return regions.get(regionId);
     }
 
@@ -67,23 +67,16 @@ public final class SceneInstance extends MessageHandler<SceneInstance> {
     }
 
     // 根据坐标计算出来在哪块区域.
-    public String calRegionId(float x, float y) {
+    public long calRegionId(float x, float y) {
         int xID = (int) Math.floor(x / this.regionGridSize);
         int ySize = (int) Math.floor(y / this.regionGridSize);
-        return MapUtil.buildRegionId(xID, ySize);
+        return MapUtil.newBuildRegionId(xID, ySize);
     }
 
     // 计算周围的格子，并处理
     public void calAroundRegionId(Position<?> position, Consumer<MapRegion> consumer) {
         MapRegion currRegion = position.getCurrRegion();
-        consumer.accept(currRegion);
-
-        Integer[] integers = MapUtil.splitRegionId(currRegion.getRegionId());
-        for (int xId = integers[0] - viewRegionGridSize; xId <= integers[0] + viewRegionGridSize; xId++) {
-            for (int yId = integers[1] - viewRegionGridSize; yId <= integers[1] + viewRegionGridSize; yId++) {
-                consumer.accept(position.getSceneInstance().returnRegion(MapUtil.buildRegionId(xId, yId)));
-            }
-        }
+		currRegion.consumeInterestRegion(consumer);
     }
 
     // 销毁
@@ -173,4 +166,8 @@ public final class SceneInstance extends MessageHandler<SceneInstance> {
     public String getSceneId() {
         return sceneId;
     }
+
+	public int getViewRegionGridSize() {
+		return viewRegionGridSize;
+	}
 }

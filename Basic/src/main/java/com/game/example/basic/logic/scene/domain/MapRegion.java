@@ -1,12 +1,15 @@
 package com.game.example.basic.logic.scene.domain;
 
 import com.game.example.basic.logic.scene.object.VisibleObject;
+import com.game.example.basic.logic.scene.utils.MapUtil;
 import com.game.example.common.logger.GameLogger;
 import com.google.common.collect.Maps;
 import org.qiunet.utils.collection.enums.ForEachResult;
 import org.slf4j.Logger;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -16,18 +19,35 @@ import java.util.function.Predicate;
  */
 public class MapRegion {
     private static final Logger logger = GameLogger.COMM_LOGGER.getLogger();
+	// id -> 地图对象
+	final Map<Long, VisibleObject> data = Maps.newConcurrentMap();
+	/***
+	 * 感兴趣的region id list
+	 */
+	protected final Set<Long> interestRegionIdList = new TreeSet<>();
 
-    private final String regionId;
+	/**
+	 * id
+	 */
+	protected final long regionId;
 
-    // id -> 地图对象
-    final Map<Long, VisibleObject> data = Maps.newConcurrentMap();
+	protected final int x, z;
 
     // 场景，地图实例
     private final SceneInstance sceneInstance;
 
-    public MapRegion(SceneInstance sceneInstance, String regionId) {
-        this.sceneInstance = sceneInstance;
-        this.regionId = regionId;
+    public MapRegion(SceneInstance sceneInstance, long regionId) {
+		int viewRegionGridSize = sceneInstance.getViewRegionGridSize();
+		this.sceneInstance = sceneInstance;
+		this.x = MapUtil.calX(regionId);
+		this.z = MapUtil.calZ(regionId);
+		this.regionId = regionId;
+
+		for (int xId = x - viewRegionGridSize; xId <= x + viewRegionGridSize; xId++) {
+			for (int zId = z - viewRegionGridSize; zId <= z + viewRegionGridSize; zId++) {
+				interestRegionIdList.add(MapUtil.newBuildRegionId(xId, zId));
+			}
+		}
     }
 
     public void addObj(VisibleObject obj) {
@@ -53,6 +73,19 @@ public class MapRegion {
         data.values().forEach(consumer);
     }
 
+	/**
+	 * 消费感兴趣的MapRegion
+	 * @param consumer
+	 */
+	public void consumeInterestRegion(Consumer<MapRegion> consumer) {
+		for (Long id : this.interestRegionIdList) {
+			MapRegion mapRegion = this.getSceneInstance().returnRegion(id);
+			if (mapRegion != null) {
+				consumer.accept(mapRegion);
+			}
+		}
+	}
+
     public void walkMObject(Predicate<VisibleObject> filter, Function<VisibleObject, ForEachResult> consume) {
         for (VisibleObject object : data.values()) {
             if (filter != null && filter.test(object)) {
@@ -65,7 +98,7 @@ public class MapRegion {
         }
     }
 
-    public String getRegionId() {
+    public long getRegionId() {
         return regionId;
     }
 
