@@ -1,5 +1,7 @@
 package com.game.example.basic.logic.scene.utils;
 
+import org.qiunet.utils.math.MathUtil;
+
 public class MapUtil {
 	/**
 	 * 得到一个RegionId.
@@ -7,7 +9,7 @@ public class MapUtil {
 	 * @param zID z 坐标除完区块长度后的序号
 	 */
 	public static long newBuildRegionId(int xID, int zID) {
-		return (((long)xID) << Integer.SIZE) | (zID & 0xffffffffL);
+		return MathUtil.buildVal(xID, zID);
 	}
 
 	/**
@@ -16,7 +18,7 @@ public class MapUtil {
 	 * @return xId
 	 */
 	public static int calX(long id) {
-		return (int) (id >> Integer.SIZE);
+		return MathUtil.calX(id);
 	}
 	/**
 	 * 根据 {@link #newBuildRegionId(int, int)}的id. 得到zId
@@ -24,7 +26,7 @@ public class MapUtil {
 	 * @return zId
 	 */
 	public static int calZ(long id) {
-		return (int) id;
+		return MathUtil.calY(id);
 	}
 
 }
