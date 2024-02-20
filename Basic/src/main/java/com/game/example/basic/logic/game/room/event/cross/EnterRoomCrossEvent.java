@@ -1,8 +1,9 @@
 package com.game.example.basic.logic.game.room.event.cross;
 
-import org.qiunet.cross.event.BaseCrossPlayerEvent;
 
-public class EnterRoomCrossEvent extends BaseCrossPlayerEvent {
+import org.qiunet.cross.event.ToCrossPlayerEvent;
+
+public class EnterRoomCrossEvent extends ToCrossPlayerEvent {
 	/**
 	 * 私密房
 	 */

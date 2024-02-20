@@ -125,8 +125,13 @@ public enum GameService {
 
     //加入指定房间
     public void joinRoomById(PlayerActor playerActor, RoomInfoData roomInfoData) {
-        playerActor.crossToServer(roomInfoData.getServerId());
-        playerActor.fireCrossEvent(EnterRoomByIdEvent.valueOf(roomInfoData.getRoomId()));
+        playerActor.crossToServer(roomInfoData.getServerId(), result -> {
+			if (! result) {
+				GameLogger.GAME_ROOM.error("Enter room error!");
+				return;
+			}
+			playerActor.fireCrossEvent(EnterRoomByIdEvent.valueOf(roomInfoData.getRoomId()));
+		});
     }
 
     public void sendEnterRoomFailMessage(PlayerActor playerActor, IGameStatus status){

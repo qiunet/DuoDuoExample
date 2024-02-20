@@ -34,7 +34,7 @@ public class ItemStorage {
 		}
 		this.items = list.stream().peek(item -> item.itemStorage = this).collect(Collectors.toMap(PackItem::getUid, Function.identity()));
 		this.itemCounts = this.items.values().stream().collect(Collectors.groupingBy(
-				PackItem::getResId, Collectors.reducing(0, item -> (int)item.getValue(), Integer::sum))
+				PackItem::getResId, Collectors.reducing(0, item -> (int)item.getCount(), Integer::sum))
 		);
 	}
 
@@ -59,15 +59,15 @@ public class ItemStorage {
 				break;
 			}
 			PackItem item = iterator.next();
-			if (item.getValue() > 0) {
-				if (item.getValue() >= num) {
-					item.setNum((int) (item.getValue() - num));
+			if (item.getCount() > 0) {
+				if (item.getCount() >= num) {
+					item.setNum((int) (item.getCount() - num));
 					num = 0;
 				} else {
-					num -= item.getValue();
+					num -= (int) item.getCount();
 					item.setNum(0);
 				}
-				if (item.getValue() == 0) {
+				if (item.getCount() == 0) {
 					iterator.remove(); // 移除
 					itemCounts.merge(item.getResId(), -num, Integer::sum);
 					updateItems.add(item.getUid());

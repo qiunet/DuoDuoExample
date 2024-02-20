@@ -10,8 +10,6 @@ import org.qiunet.game.test.robot.Robot;
 import org.qiunet.utils.http.HttpRequest;
 import org.qiunet.utils.json.JsonUtil;
 
-import java.util.Map;
-
 // @BehaviorAction(name = "http登录")
 public class HttpLoginAction extends RobotRequestAction {
 
@@ -23,8 +21,8 @@ public class HttpLoginAction extends RobotRequestAction {
     protected ActionStatus execute() {
         HttpRequest.post(ServerConfig.getInstance().getString("server.address"))
                 .withJsonData(ImmutableMap.of("uid", getOwner().getAccount()))
-                .asyncExecutor((call, response) -> getRobotData().setHttpLoginResponse(
-                        JsonUtil.getGeneralObj(response.body().string(), LoginResponse.class)));
+                .asyncExecutor((response) -> getRobotData().setHttpLoginResponse(
+                        JsonUtil.getGeneralObj(response.body(), LoginResponse.class)));
 
         return ActionStatus.RUNNING;
     }

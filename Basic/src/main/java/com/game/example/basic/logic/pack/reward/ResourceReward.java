@@ -6,13 +6,14 @@ import com.game.example.basic.logic.pack.enums.PackType;
 import com.game.example.common.constants.GameStatus;
 import org.qiunet.flash.handler.common.player.PlayerActor;
 import org.qiunet.flash.handler.context.status.StatusResult;
+import org.qiunet.function.reward.BaseCfgReward;
 import org.qiunet.function.reward.BaseReward;
 import org.qiunet.function.reward.RewardConfig;
 import org.qiunet.function.reward.RewardContext;
 
 import java.util.List;
 
-public class ResourceReward extends BaseReward<PlayerActor> {
+public class ResourceReward extends BaseCfgReward<PlayerActor> {
 
 	public ResourceReward(int resId, long value) {
 		super(resId, value);
@@ -27,7 +28,7 @@ public class ResourceReward extends BaseReward<PlayerActor> {
 	 */
 	@Override
 	public StatusResult doVerify(RewardContext<PlayerActor> context) {
-		ItemStorage itemStorage = PackType.getItemStorage(context.getPlayer(), cfgId);
+		ItemStorage itemStorage = PackType.getItemStorage(context.getPlayer(), getId());
 		if (itemStorage.getType() != PackType.RESOURCE) {
 			return StatusResult.valueOf(GameStatus.PARAMS_ERROR);
 		}
@@ -39,9 +40,9 @@ public class ResourceReward extends BaseReward<PlayerActor> {
 	 */
 	@Override
 	public void grant(RewardContext<PlayerActor> context) {
-		ItemStorage itemStorage = PackType.getItemStorage(context.getPlayer(), cfgId);
-		int realValue = (int) Math.max(0, value);
-		List<PackItem> packItems = itemStorage.addItem(cfgId, realValue);
+		ItemStorage itemStorage = PackType.getItemStorage(context.getPlayer(), getId());
+		int realValue = (int) Math.max(0, getCount());
+		List<PackItem> packItems = itemStorage.addItem(getId(), realValue);
 		context.getRealRewards().addAll(packItems);
 	}
 

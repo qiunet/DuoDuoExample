@@ -1,11 +1,11 @@
 package com.game.example.basic.logic.game.room.event;
 
-import org.qiunet.flash.handler.common.player.event.BasePlayerEvent;
+import org.qiunet.flash.handler.common.player.event.ToPlayerEvent;
 
 /***
  * 请求玩法服房间信息.
  */
-public class PlayerRoomInfoRspEvent extends BasePlayerEvent {
+public class PlayerRoomInfoRspEvent extends ToPlayerEvent {
 	/**
 	 * 房间ID
 	 */

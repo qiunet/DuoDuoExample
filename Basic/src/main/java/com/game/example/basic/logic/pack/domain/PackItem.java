@@ -76,7 +76,7 @@ public class PackItem implements IRealReward {
 	}
 
 	@Override
-	public long getValue() {
+	public long getCount() {
 		return num;
 	}
 }

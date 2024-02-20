@@ -1,11 +1,11 @@
 package com.game.example.basic.logic.game.room.event.cross;
 
-import org.qiunet.cross.event.BaseCrossPlayerEvent;
+import org.qiunet.cross.event.ToCrossPlayerEvent;
 
 /***
  * 请求玩法服房间信息.
  */
-public class PlayerRoomInfoReqEvent extends BaseCrossPlayerEvent {
+public class PlayerRoomInfoReqEvent extends ToCrossPlayerEvent {
 	/**
 	 * 是否私密
 	 */
